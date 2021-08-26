@@ -90,18 +90,22 @@ public class ship : MonoBehaviour
 
     }
 
-    public void LandingProcess(Vector2 landDirection, Vector3 landPosition){
+    public void LandingProcess(Transform pylonTransform){
         if(Landed){
             return;
         }
         Landed = true;
         clearpath();
+        
+        //hack to reset transform rotation,
+        spriteTransform.SetParent(null,true);
+        transform.rotation = Quaternion.identity;
+        spriteTransform.SetParent(transform,true);
+
+
         transform.DOScale(new Vector3(0.6f,0.6f,0.6f),1f);
-        float angleDiff = Vector2.SignedAngle(spriteTransform.up, landDirection);
-        Debug.Log(angleDiff);
-        float newZ = transform.localRotation.eulerAngles.z + angleDiff;
-        spriteTransform.DOLocalRotate(new Vector3(0,0,newZ),1f);
-        transform.DOMove(landPosition,1f).onComplete += ()=>{
+        spriteTransform.DOLocalRotate(new Vector3(0,0,pylonTransform.localEulerAngles.z),1f);
+        transform.DOMove(pylonTransform.position,1f).onComplete += ()=>{
             //do runway animation. for now I'm making it dissapear.
             DestroyShip();
         };
