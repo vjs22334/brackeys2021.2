@@ -26,8 +26,10 @@ public class ShipCollider : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("LandZone")&&shipType!=ShipType.ENEMY){
-            _ship.LandingProcess(other.transform,other.GetComponent<LandingPylon>().IsPylon);
+        if (other.CompareTag("LandZone") && shipType != ShipType.ENEMY)
+        {
+            if (_ship.landZone == other.GetComponent<LandingPylon>().landZone)
+                _ship.LandingProcess(other.transform, other.GetComponent<LandingPylon>().IsPylon);
         }
 
         if (other.CompareTag("Wall"))

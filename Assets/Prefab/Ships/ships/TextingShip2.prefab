@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1d829678cdcbc4e818cd251001ef44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.75
+  moveSpeed: 2
   turnspeed: 500
   spriteTransform: {fileID: 145280084215329469}
   landZone: 1

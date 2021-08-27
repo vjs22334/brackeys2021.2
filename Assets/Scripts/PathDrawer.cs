@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class PathDrawer : MonoBehaviour
 {
-    public LineRenderer lineRenderer;
+    private LineRenderer lineRenderer;
     public float pointSpacing = 0.5f;
 
     public LayerMask MouseRayCastLayerMask;
@@ -61,7 +61,8 @@ public class PathDrawer : MonoBehaviour
             Collider2D LandZoneCollider = Physics2D.OverlapPoint(currMousePosition, LandZoneLayerMask);
             if (LandZoneCollider != null)
             {
-                LandZone landZone = GetComponent<LandingPylon>().landZone;
+                //LandZone landZone = GetComponent<LandingPylon>().landZone;
+                LandZone landZone = LandZoneCollider.GetComponent<LandingPylon>().landZone;
                 if (landZone == Ship.landZone)
                 {
                     positions.Add(LandZoneCollider.transform.position);

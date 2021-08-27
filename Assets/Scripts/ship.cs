@@ -37,15 +37,16 @@ public class ship : MonoBehaviour
         pathPoints = new List<Vector3>();
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
-        
+
     }
 
-    public void AddPathPoint(Vector3 point){
+    public void AddPathPoint(Vector3 point)
+    {
         pathPoints.Add(point);
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
     }
-    
+
 
     public void clearpath()
     {
@@ -69,29 +70,33 @@ public class ship : MonoBehaviour
             currDirection.z = 0;
             currDirection = currDirection.normalized;
         }
-      
+
 
         transform.position += currDirection * moveSpeed * Time.deltaTime;
         float angleDiff = Vector2.SignedAngle(spriteTransform.up, currDirection);
-        if(Mathf.Abs(angleDiff) > 1f){
+        if (Mathf.Abs(angleDiff) > 1f)
+        {
             float zRotation = Mathf.Sign(angleDiff) * turnspeed * Time.deltaTime;
             zRotation = Mathf.Clamp(zRotation, -1 * Mathf.Abs(angleDiff), Mathf.Abs(angleDiff));
             float newZ = spriteTransform.localRotation.eulerAngles.z + zRotation;
             spriteTransform.localRotation = Quaternion.Euler(0, 0, newZ);
         }
-        if (pathPoints.Count > 0 && (pathPoints[0] - transform.position).magnitude < 0.01f){
-            
+        if (pathPoints.Count > 0 && (pathPoints[0] - transform.position).magnitude < 0.01f)
+        {
+
             pathPoints.RemoveAt(0);
             lineRenderer.positionCount = pathPoints.Count;
             lineRenderer.SetPositions(pathPoints.ToArray());
         }
-                
-        
+
+
 
     }
 
-    public void LandingProcess(Transform pylonTransform, bool pylon){
-        if(Landed){
+    public void LandingProcess(Transform pylonTransform, bool pylon)
+    {
+        if (Landed)
+        {
             return;
         }
         Landed = true;
@@ -103,17 +108,20 @@ public class ship : MonoBehaviour
         spriteTransform.SetParent(transform, true);
 
 
-        transform.DOScale(new Vector3(0.6f,0.6f,0.6f),1f);
-        spriteTransform.DOLocalRotate(new Vector3(0,0,pylonTransform.localEulerAngles.z),1f);
-        if(!pylon){
+        transform.DOScale(new Vector3(0.6f, 0.6f, 0.6f), 1f);
+        spriteTransform.DOLocalRotate(new Vector3(0, 0, pylonTransform.localEulerAngles.z), 1f);
+        if (!pylon)
+        {
             spriteTransform.GetComponent<SpriteRenderer>().sortingOrder = -10;
         }
-        transform.DOMove(pylonTransform.position,1f).onComplete += ()=>{
-            transform.DOMove(transform.position+pylonTransform.up*2f,1f).onComplete += () => {
+        transform.DOMove(pylonTransform.position, 1f).onComplete += () =>
+        {
+            transform.DOMove(transform.position + pylonTransform.up * 2f, 1f).onComplete += () =>
+            {
                 DestroyShip();
                 GameManager.Instance.AddScore(true);
             };
-            
+
         };
     }
 
