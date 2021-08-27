@@ -44,6 +44,7 @@ public class PathDrawer : MonoBehaviour
                 drawing = true;
                 Ship = shipCollider.GetComponent<ship>();
                 Ship.SetNewPath();
+                Ship.deletePoint += deletePoint;
             }
         }
 
@@ -61,12 +62,15 @@ public class PathDrawer : MonoBehaviour
             Collider2D LandZoneCollider = Physics2D.OverlapPoint(currMousePosition, LandZoneLayerMask);
             if (LandZoneCollider != null)
             {
-                LandZone landZone = GetComponent<LandingPylon>().landZone;
+                LandZone landZone = LandZoneCollider.GetComponent<LandingPylon>().landZone;
                 if (landZone == Ship.landZone)
                 {
                     positions.Add(LandZoneCollider.transform.position);
                     lineRenderer.positionCount = positions.Count;
                     lineRenderer.SetPositions(positions.ToArray());
+                    Ship.AddPathPoint(currMousePosition);
+                    positions.Clear();
+                    lineRenderer.positionCount = positions.Count;
                     drawing = false;
                     Ship.HeadingToLand();
                 }
@@ -77,6 +81,9 @@ public class PathDrawer : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             positions.Clear();
+            if(Ship!=null)
+                Ship.deletePoint -= deletePoint;
+            Ship = null;
             if (drawing)
             {
                 drawing = false;
@@ -84,6 +91,14 @@ public class PathDrawer : MonoBehaviour
             }
 
         }
+    }
+
+    void deletePoint(Vector3 point){
+        if(positions.Count == 0)
+            return;
+        positions.RemoveAt(0);
+        lineRenderer.positionCount = positions.Count;
+        lineRenderer.SetPositions(positions.ToArray());
     }
 
     float DistanceFromLastpoint(Vector3 point)

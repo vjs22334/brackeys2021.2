@@ -1,9 +1,12 @@
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class ship : MonoBehaviour
 {
+
+    public event Action<Vector3> deletePoint = delegate{};
     public float moveSpeed = 5f;
     public float turnspeed = 100f;
 
@@ -81,6 +84,7 @@ public class ship : MonoBehaviour
         }
         if (pathPoints.Count > 0 && (pathPoints[0] - transform.position).magnitude < 0.01f){
             
+            deletePoint?.Invoke(pathPoints[0]);
             pathPoints.RemoveAt(0);
             lineRenderer.positionCount = pathPoints.Count;
             lineRenderer.SetPositions(pathPoints.ToArray());
