@@ -27,7 +27,7 @@ public class ShipCollider : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("LandZone")&&shipType!=ShipType.ENEMY){
-            _ship.LandingProcess(other.transform);
+            _ship.LandingProcess(other.transform,other.GetComponent<LandingPylon>().IsPylon);
         }
 
         if(other.CompareTag("Ship")){

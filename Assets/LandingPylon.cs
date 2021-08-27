@@ -6,6 +6,9 @@ public class LandingPylon : MonoBehaviour
 {
     public LandZone landZone;
 
+    [Tooltip("true for pylon, false for docking port")]
+    public bool IsPylon  = true;
+
 }
 
 public enum LandZone
