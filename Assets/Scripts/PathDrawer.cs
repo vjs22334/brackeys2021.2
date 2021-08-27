@@ -8,6 +8,7 @@ public class PathDrawer : MonoBehaviour
     public float pointSpacing = 0.5f;
 
     public LayerMask MouseRayCastLayerMask;
+    public LayerMask LandZoneLayerMask;
     List<Vector3> positions;
     Vector3 currMousePosition;
 
@@ -52,12 +53,28 @@ public class PathDrawer : MonoBehaviour
                 lineRenderer.SetPositions(positions.ToArray());
                 Ship.SetNewPath(positions.ToArray());
             }
+
+            Collider2D LandZoneCollider  = Physics2D.OverlapPoint(currMousePosition,LandZoneLayerMask);
+            if(LandZoneCollider!=null){
+                LandZone landZone = GetComponent<LandingPylon>().landZone;
+                if(landZone == Ship.landZone){
+                    positions.Add(LandZoneCollider.transform.position);
+                    lineRenderer.positionCount = positions.Count;
+                    lineRenderer.SetPositions(positions.ToArray());
+                    drawing = false;
+                    Ship.HeadingToLand();
+                }
+                
+            }
         }
 
-        if(Input.GetButtonUp("Fire1") && drawing){
-            drawing = false;
+        if(Input.GetButtonUp("Fire1") ){
             positions.Clear();
-            lineRenderer.positionCount = positions.Count;
+            if(drawing){
+                drawing = false;
+                lineRenderer.positionCount = positions.Count;
+            }
+            
         }
     }
 
