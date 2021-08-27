@@ -1,6 +1,6 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 [RequireComponent(typeof(LineRenderer))]
 public class ship : MonoBehaviour
 {
@@ -14,7 +14,9 @@ public class ship : MonoBehaviour
     LineRenderer lineRenderer;
     List<Vector3> pathPoints;
 
-    Vector3 currDirection;
+    int currPathIndex = 1;
+
+    public Vector3 currDirection; // -1,0,0 
 
     bool Landed = false;
 
@@ -27,7 +29,7 @@ public class ship : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         pathPoints = new List<Vector3>();
-        currDirection = transform.up;
+        //currDirection = transform.up;
     }
 
     public void SetNewPath()
@@ -45,7 +47,7 @@ public class ship : MonoBehaviour
     }
     
 
-    void clearpath()
+    public void clearpath()
     {
         pathPoints.Clear();
         lineRenderer.positionCount = 0;
@@ -56,7 +58,8 @@ public class ship : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if(Landed){
+        if (Landed)
+        {
             return;
         }
 
@@ -93,11 +96,11 @@ public class ship : MonoBehaviour
         }
         Landed = true;
         clearpath();
-        
+
         //hack to reset transform rotation,
-        spriteTransform.SetParent(null,true);
+        spriteTransform.SetParent(null, true);
         transform.rotation = Quaternion.identity;
-        spriteTransform.SetParent(transform,true);
+        spriteTransform.SetParent(transform, true);
 
 
         transform.DOScale(new Vector3(0.6f,0.6f,0.6f),1f);
@@ -114,29 +117,35 @@ public class ship : MonoBehaviour
         };
     }
 
-    public void DestroyShip(){
+    public void DestroyShip()
+    {
         //Do vfx here.
         Destroy(gameObject);
     }
 
     //color change to indicate going to land
-    public void HeadingToLand(){
+    public void HeadingToLand()
+    {
 
     }
 
     //collision indicator
-    public void CollisionAlert(){
+    public void CollisionAlert()
+    {
 
     }
 
 
-    public void ResetHeadingToLand(){
+    public void ResetHeadingToLand()
+    {
 
     }
 
-    public void ResetCollisionAlert(){
+    public void ResetCollisionAlert()
+    {
 
     }
+
 
 
 }

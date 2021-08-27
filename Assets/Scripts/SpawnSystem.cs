@@ -7,17 +7,21 @@ public class SpawnSystem : MonoBehaviour
 
     public GameObject[] ships;
 
-    public bool isGamePlaying{
-        get{
-            if(GameManager.Instance == null){
+    public bool isGamePlaying
+    {
+        get
+        {
+            if (GameManager.Instance == null)
+            {
                 return true;
             }
-            else{
+            else
+            {
                 return GameManager.Instance.isPlaying;
             }
         }
     }
-    public float spawningTime = 10f;
+    public float spawningTime = 5f;
 
 
     private int currentPoint;
@@ -47,7 +51,8 @@ public class SpawnSystem : MonoBehaviour
     {
         currentPoint = Random.Range(0, spawnPoints.Length);
         Debug.Log("Current Point " + currentPoint);
-        GameObject ship = Instantiate(ships[GetRandomShip()], spawnPoints[currentPoint].transform.position, GetRandomSpawnPosAndRot());
+        GameObject ship = Instantiate(ships[GetRandomShip()], spawnPoints[currentPoint].transform.position, Quaternion.identity);
+        ship.GetComponent<ship>().currDirection = GetRandomSpawnPosAndRot();
         //ship.GetComponent<ship>().SetSpawnSpeedAndRot(GetRandomShipSpeed(), GetRandomShipRot());
     }
 
@@ -68,7 +73,7 @@ public class SpawnSystem : MonoBehaviour
     }
 
 
-    private Quaternion GetRandomSpawnPosAndRot()
+    private Vector3 GetRandomSpawnPosAndRot()
     {
 
         Vector3 shipRotation = new Vector3(0, 0, 0);
@@ -85,11 +90,9 @@ public class SpawnSystem : MonoBehaviour
         {
             shipRotation.y = Random.Range(currentSpawnPoint.shipStartRotation.y, currentSpawnPoint.shipEndRotation.y);
         }
-        if (currentSpawnPoint.shipStartRotation.z != 0 || currentSpawnPoint.shipEndRotation.z != 0)
-        {
-            shipRotation.z = Random.Range(currentSpawnPoint.shipStartRotation.z, currentSpawnPoint.shipEndRotation.z);
-        }
-        return rot = Quaternion.Euler(shipRotation.x, shipRotation.y, shipRotation.z);
+
+        return shipRotation;
+        //return rot = Quaternion.Euler(shipRotation.x, shipRotation.y, shipRotation.z);
 
     }
 
