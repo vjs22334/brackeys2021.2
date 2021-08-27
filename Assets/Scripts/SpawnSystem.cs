@@ -7,7 +7,20 @@ public class SpawnSystem : MonoBehaviour
 
     public GameObject[] ships;
 
-    public bool isGamePlaying = true;
+    public bool isGamePlaying
+    {
+        get
+        {
+            if (GameManager.Instance == null)
+            {
+                return true;
+            }
+            else
+            {
+                return GameManager.Instance.isPlaying;
+            }
+        }
+    }
     public float spawningTime = 5f;
 
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
@@ -34,54 +33,64 @@ public class PathDrawer : MonoBehaviour
     void Update()
     {
         Vector3 currMousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
-        currMousePosition.z=0;
-        
-        if(Input.GetButtonDown("Fire1")){
+        currMousePosition.z = 0;
 
-            Collider2D shipCollider  = Physics2D.OverlapPoint(currMousePosition,MouseRayCastLayerMask);
-            if(shipCollider!=null){
+        if (Input.GetButtonDown("Fire1"))
+        {
+
+            Collider2D shipCollider = Physics2D.OverlapPoint(currMousePosition, MouseRayCastLayerMask);
+            if (shipCollider != null)
+            {
                 drawing = true;
                 Ship = shipCollider.GetComponent<ship>();
             }
         }
 
-        if(Input.GetButton("Fire1") && drawing){
-            
-            if(DistanceFromLastpoint(currMousePosition) > pointSpacing){
+        if (Input.GetButton("Fire1") && drawing)
+        {
+
+            if (DistanceFromLastpoint(currMousePosition) > pointSpacing)
+            {
                 positions.Add(currMousePosition);
                 lineRenderer.positionCount = positions.Count;
                 lineRenderer.SetPositions(positions.ToArray());
                 Ship.SetNewPath(positions.ToArray());
             }
 
-            Collider2D LandZoneCollider  = Physics2D.OverlapPoint(currMousePosition,LandZoneLayerMask);
-            if(LandZoneCollider!=null){
+            Collider2D LandZoneCollider = Physics2D.OverlapPoint(currMousePosition, LandZoneLayerMask);
+            if (LandZoneCollider != null)
+            {
                 LandZone landZone = GetComponent<LandingPylon>().landZone;
-                if(landZone == Ship.landZone){
+                if (landZone == Ship.landZone)
+                {
                     positions.Add(LandZoneCollider.transform.position);
                     lineRenderer.positionCount = positions.Count;
                     lineRenderer.SetPositions(positions.ToArray());
                     drawing = false;
                     Ship.HeadingToLand();
                 }
-                
+
             }
         }
 
-        if(Input.GetButtonUp("Fire1") ){
+        if (Input.GetButtonUp("Fire1"))
+        {
             positions.Clear();
-            if(drawing){
+            if (drawing)
+            {
                 drawing = false;
                 lineRenderer.positionCount = positions.Count;
             }
-            
+
         }
     }
 
-    float DistanceFromLastpoint(Vector3 point){
-        if(positions.Count == 0){
+    float DistanceFromLastpoint(Vector3 point)
+    {
+        if (positions.Count == 0)
+        {
             return float.MaxValue;
         }
-        return  (point - positions[positions.Count-1]).magnitude;
+        return (point - positions[positions.Count - 1]).magnitude;
     }
 }
