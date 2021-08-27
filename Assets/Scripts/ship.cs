@@ -28,7 +28,7 @@ public class ship : MonoBehaviour
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
     /// </summary>
-    void Start()
+    protected virtual void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         pathPoints = new List<Vector3>();
@@ -59,7 +59,7 @@ public class ship : MonoBehaviour
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
-    void Update()
+    protected virtual void Update()
     {
         if (Landed)
         {
