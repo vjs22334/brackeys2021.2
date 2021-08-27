@@ -32,12 +32,20 @@ public class ship : MonoBehaviour
         //currDirection = transform.up;
     }
 
-    public void SetNewPath(Vector3[] newPoints)
+    public void SetNewPath()
     {
-        pathPoints = new List<Vector3>(newPoints);
+        pathPoints = new List<Vector3>();
+        lineRenderer.positionCount = pathPoints.Count;
+        lineRenderer.SetPositions(pathPoints.ToArray());
+        
+    }
+
+    public void AddPathPoint(Vector3 point){
+        pathPoints.Add(point);
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
     }
+    
 
     public void clearpath()
     {
@@ -55,46 +63,35 @@ public class ship : MonoBehaviour
             return;
         }
 
-        if (pathPoints.Count > 1)
+        if (pathPoints.Count > 0)
         {
-            if (currPathIndex > pathPoints.Count - 1)
-            {
-                currPathIndex = 1;
-                clearpath();
-            }
-
-            currDirection = (pathPoints[currPathIndex] - transform.position).normalized;
+            currDirection = (pathPoints[0] - transform.position).normalized;
             currDirection.z = 0;
             currDirection = currDirection.normalized;
         }
-        else
-        {
-            currPathIndex = 1;
-            clearpath();
-        }
+      
 
         transform.position += currDirection * moveSpeed * Time.deltaTime;
         float angleDiff = Vector2.SignedAngle(spriteTransform.up, currDirection);
-        float zRotation = Mathf.Sign(angleDiff) * turnspeed * Time.deltaTime;
-        // Debug.Log("zRotation before:"+zRotation);
-        zRotation = Mathf.Clamp(zRotation, -1 * Mathf.Abs(angleDiff), Mathf.Abs(angleDiff));
-        // Debug.Log("AngleDiff:"+angleDiff);
-        // Debug.Log("zRotation:"+zRotation);
-        // Debug.DrawRay(transform.position,currDirection*3,Color.green);
-        // Debug.Log("oldZ: "+ spriteTransform.localRotation.eulerAngles.z);
-        float newZ = spriteTransform.localRotation.eulerAngles.z + zRotation;
-        // Debug.Log("newZ: "+ newZ);
-        spriteTransform.localRotation = Quaternion.Euler(0, 0, newZ);
-        // Debug.DrawRay(transform.position,spriteTransform.up*3,Color.red);
-        if ((currPathIndex < pathPoints.Count) && (pathPoints[currPathIndex] - transform.position).magnitude < 0.01f)
-            currPathIndex++;
+        if(Mathf.Abs(angleDiff) > 1f){
+            float zRotation = Mathf.Sign(angleDiff) * turnspeed * Time.deltaTime;
+            zRotation = Mathf.Clamp(zRotation, -1 * Mathf.Abs(angleDiff), Mathf.Abs(angleDiff));
+            float newZ = spriteTransform.localRotation.eulerAngles.z + zRotation;
+            spriteTransform.localRotation = Quaternion.Euler(0, 0, newZ);
+        }
+        if (pathPoints.Count > 0 && (pathPoints[0] - transform.position).magnitude < 0.01f){
+            
+            pathPoints.RemoveAt(0);
+            lineRenderer.positionCount = pathPoints.Count;
+            lineRenderer.SetPositions(pathPoints.ToArray());
+        }
+                
+        
 
     }
 
-    public void LandingProcess(Transform pylonTransform)
-    {
-        if (Landed)
-        {
+    public void LandingProcess(Transform pylonTransform, bool pylon){
+        if(Landed){
             return;
         }
         Landed = true;
@@ -106,12 +103,17 @@ public class ship : MonoBehaviour
         spriteTransform.SetParent(transform, true);
 
 
-        transform.DOScale(new Vector3(0.6f, 0.6f, 0.6f), 1f);
-        spriteTransform.DOLocalRotate(new Vector3(0, 0, pylonTransform.localEulerAngles.z), 1f);
-        transform.DOMove(pylonTransform.position, 1f).onComplete += () =>
-        {
-            //do runway animation. for now I'm making it dissapear.
-            DestroyShip();
+        transform.DOScale(new Vector3(0.6f,0.6f,0.6f),1f);
+        spriteTransform.DOLocalRotate(new Vector3(0,0,pylonTransform.localEulerAngles.z),1f);
+        if(!pylon){
+            spriteTransform.GetComponent<SpriteRenderer>().sortingOrder = -10;
+        }
+        transform.DOMove(pylonTransform.position,1f).onComplete += ()=>{
+            transform.DOMove(transform.position+pylonTransform.up*2f,1f).onComplete += () => {
+                DestroyShip();
+                GameManager.Instance.AddScore(true);
+            };
+            
         };
     }
 

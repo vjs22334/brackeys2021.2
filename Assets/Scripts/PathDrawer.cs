@@ -43,6 +43,7 @@ public class PathDrawer : MonoBehaviour
             {
                 drawing = true;
                 Ship = shipCollider.GetComponent<ship>();
+                Ship.SetNewPath();
             }
         }
 
@@ -54,7 +55,7 @@ public class PathDrawer : MonoBehaviour
                 positions.Add(currMousePosition);
                 lineRenderer.positionCount = positions.Count;
                 lineRenderer.SetPositions(positions.ToArray());
-                Ship.SetNewPath(positions.ToArray());
+                Ship.AddPathPoint(currMousePosition);
             }
 
             Collider2D LandZoneCollider = Physics2D.OverlapPoint(currMousePosition, LandZoneLayerMask);
