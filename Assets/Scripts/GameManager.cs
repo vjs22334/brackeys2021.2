@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public int ScorePerLanding = 1;
     public int SCorePerKill = 1;
 
+    public Color LandColor;
+    public Color DefaultColor;
+
     public int maxenemySpawnTime = 60;
     public int minEnemySpawntime = 10;
 

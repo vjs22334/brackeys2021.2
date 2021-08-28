@@ -45,7 +45,7 @@ public class ShipCollider : MonoBehaviour
             Debug.Log("Wall hit " + _ship.currDirection);
         }
 
-        if (other.CompareTag("Ship") && !_ship.Landed)
+        if (other.CompareTag("Ship") && !_ship.Landed && !FirstTimeWallTrigger)
         {
             ShipCollider otherShipCollider = other.GetComponent<ShipCollider>();
             ShipType otherShipType = otherShipCollider.shipType;

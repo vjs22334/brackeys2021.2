@@ -9,7 +9,7 @@ public class ship : MonoBehaviour
     public event Action<Vector3> deletePoint = delegate { };
     public float moveSpeed = 5f;
     public float turnspeed = 100f;
-
+    public GameObject explosionEffect;
     public Transform spriteTransform;
 
     SpriteRenderer renderer;
@@ -63,7 +63,7 @@ public class ship : MonoBehaviour
         renderer.material = shipOutlineMaterial;
         GameManager.Instance.LandingZoneIndicator(landZone);
         isLanding = false;
-
+        renderer.color = GameManager.Instance.DefaultColor;
     }
 
     public void SetTheShipMaterialToNormal()
@@ -169,6 +169,9 @@ public class ship : MonoBehaviour
     public virtual void DestroyShip()
     {
         //Do vfx here.
+        if(explosionEffect!=null){
+            Instantiate(explosionEffect,transform.position,Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 
@@ -182,6 +185,8 @@ public class ship : MonoBehaviour
     public void HeadingToLand()
     {
         isLanding = true;
+        renderer.color = GameManager.Instance.LandColor;
+
     }
 
     //collision indicator

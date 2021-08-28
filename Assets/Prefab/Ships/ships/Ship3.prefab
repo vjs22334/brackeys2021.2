@@ -290,6 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   turnspeed: 500
+  explosionEffect: {fileID: 4184325750670360305, guid: 84efbe5956ea1e04698492a2a99b49a6, type: 3}
   spriteTransform: {fileID: 145280084215329469}
   landZone: 2
   OffScreenIndicator: {fileID: 17723636113324621, guid: cbdfeb9ebe7821749892c1dd641566a5, type: 3}
