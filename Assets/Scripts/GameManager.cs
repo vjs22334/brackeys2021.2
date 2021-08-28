@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         updateScoreUI();
         UpdatelivesUI();
+        EnemiesEscapedText.text = enemyEscapedCount.ToString();
         Time.timeScale = 1;
         isPlaying = true;
         ReArmDefender();
