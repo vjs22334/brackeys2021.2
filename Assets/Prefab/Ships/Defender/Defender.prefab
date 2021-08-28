@@ -372,11 +372,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba2cf495e0e66448ba8f4ca04ede672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 2
   turnspeed: 100
   spriteTransform: {fileID: 2832986162246777445}
   landZone: 3
-  SmokeParticles: {fileID: 0}
+  OffScreenIndicator: {fileID: 0}
   currDirection: {x: 0, y: 0, z: 0}
   Landed: 0
   isLanding: 0
@@ -603,7 +603,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: 6806bb439a9f40e4e8da1e2c5ac21ad2, type: 3}
   m_Color: {r: 0.9811321, g: 0.1527234, b: 0.1527234, a: 0.2}
   m_FlipX: 0
   m_FlipY: 0

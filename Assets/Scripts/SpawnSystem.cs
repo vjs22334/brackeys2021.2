@@ -60,8 +60,8 @@ public class SpawnSystem : MonoBehaviour
     {
         while (isGamePlaying)
         {
-            SpawnEnemies();
             yield return new WaitForSeconds(enemySpawningTime);
+            SpawnEnemies();
         }
     }
 
@@ -69,8 +69,8 @@ public class SpawnSystem : MonoBehaviour
     {
         GameObject ship = Instantiate(defenderShip, defenderSpawnPoint.position, Quaternion.identity);
         ship.GetComponentInChildren<ShipCollider>().FirstTimeWallTrigger = true;
-        //ship.GetComponent<Defender>().currDirection = Vector3.up;
-        ship.GetComponent<Defender>().Launch();
+        GameManager.Instance.defender = ship.GetComponent<Defender>();
+        GameManager.Instance.launchBtn.interactable = true;
         ship.transform.localScale *= 0.6f;
 
     }

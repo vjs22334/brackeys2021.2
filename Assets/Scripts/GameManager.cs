@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +15,25 @@ public class GameManager : MonoBehaviour
     public int ScorePerLanding = 1;
     public int SCorePerKill = 1;
 
+    public int maxenemySpawnTime = 60;
+    public int minEnemySpawntime = 10;
+
+    public int maxEnemyEscaped = 5;
+
+    float spawnTimeDecreasePerEnemy;
+    int enemyEscapedCount = 0;
+
+    float currEnemySpawnTime;
+
+
+
+
     [Header("UI References")]
     public TMP_Text ScoreText;
     public TMP_Text LivesText;
+    public TMP_Text EnemiesEscapedText;
+
+    public Button launchBtn;
 
     public GameObject PauseUI;
     public GameObject GameOverUI;
@@ -29,6 +46,8 @@ public class GameManager : MonoBehaviour
     public int defenderRearmTime = 5;
     public int currentRearmTime = 5;
     public bool defenderSpawned = false;
+
+    public Defender defender;
 
     public List<SpriteRenderer> landingZoneIndicator;
 
@@ -66,9 +85,12 @@ public class GameManager : MonoBehaviour
         score = 0;
         updateScoreUI();
         UpdatelivesUI();
+        EnemiesEscapedText.text = enemyEscapedCount.ToString();
         Time.timeScale = 1;
         isPlaying = true;
         ReArmDefender();
+        spawnTimeDecreasePerEnemy = (maxenemySpawnTime-minEnemySpawntime)/maxEnemyEscaped;
+        spawnSystem.enemySpawningTime = maxenemySpawnTime;
     }
 
 
@@ -76,7 +98,15 @@ public class GameManager : MonoBehaviour
     public void ReArmDefender()
     {
         defenderSpawned = false;
+        defender = null;
         StartCoroutine(RearmingDefender());
+        launchBtn.interactable = false;
+    }
+
+    public void LaunchDefender(){
+        if(defender!=null){
+            defender.Launch();
+        }
     }
 
     IEnumerator RearmingDefender()
@@ -154,6 +184,7 @@ public class GameManager : MonoBehaviour
         else
         {
             score += SCorePerKill;
+            EnemyDestroyed();
         }
         updateScoreUI();
     }
@@ -170,6 +201,25 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+    }
+
+    public void EnemyEscaped(){
+        if(enemyEscapedCount<maxEnemyEscaped){
+            enemyEscapedCount++;
+            EnemiesEscapedText.text = enemyEscapedCount.ToString();
+            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime-spawnTimeDecreasePerEnemy,minEnemySpawntime,maxEnemyEscaped);
+            spawnSystem.enemySpawningTime = currEnemySpawnTime;
+        }
+            
+    }
+    public void EnemyDestroyed(){
+        if(enemyEscapedCount>0){
+            enemyEscapedCount--;
+            EnemiesEscapedText.text = enemyEscapedCount.ToString();
+            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime+spawnTimeDecreasePerEnemy,minEnemySpawntime,maxEnemyEscaped);
+            spawnSystem.enemySpawningTime = currEnemySpawnTime;
+        }
+            
     }
 
     private void GameOver()
