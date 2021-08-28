@@ -2626,7 +2626,7 @@ MonoBehaviour:
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3159,9 +3159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9416e50e48b240541b24caaa03015d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 0}
-  gameMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: a028a861c08abfa469233bfb366df367, type: 3}
   soundEffects: []
+  bgMusicSource: {fileID: 1270909736}
+  soundEffecrSource: {fileID: 2129700490}
 --- !u!82 &1270909736
 AudioSource:
   m_ObjectHideFlags: 0

@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip backgroundMusic;
-    public AudioClip gameMusic;
+    //public AudioClip gameMusic;
 
     public List<AudioClip> soundEffects;
 
-    private AudioSource bgMusicSource;
-    private AudioSource soundEffecrSource;
+    public AudioSource bgMusicSource;
+    public AudioSource soundEffecrSource;
 
     private static AudioManager _instance = null;
     public static AudioManager Instance
@@ -35,9 +35,8 @@ public class AudioManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        bgMusicSource = GetComponent<AudioSource>();
-        soundEffecrSource = GetComponentInChildren<AudioSource>();
-        SetVolume(PlayerPrefs.GetFloat("Volume"));
+        ChangeMusic(CurrentScene.MAINMENU);
+        SetVolume(PlayerPrefs.GetFloat("Volume", 0.5f));
 
     }
 
@@ -56,15 +55,17 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeMusic(CurrentScene current)
     {
-        switch (current)
-        {
-            case CurrentScene.MAINMENU:
-                bgMusicSource.clip = backgroundMusic;
-                break;
-            case CurrentScene.LEVEL1:
-                bgMusicSource.clip = gameMusic;
-                break;
-        }
+        //switch (current)
+        //{
+        //    case CurrentScene.MAINMENU:
+        //        bgMusicSource.clip = backgroundMusic;
+        //        break;
+        //    case CurrentScene.LEVEL1:
+        //        bgMusicSource.clip = gameMusic;
+        //        break;
+        //}
+        bgMusicSource.clip = backgroundMusic;
+        bgMusicSource.Play();
     }
 
     public void PlayTheSoundEffect(TypesOfSoundEffect typesOfSoundEffect)
