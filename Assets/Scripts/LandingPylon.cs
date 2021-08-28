@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LandingPylon : MonoBehaviour
 {
     public LandZone landZone;
 
+
     [Tooltip("true for pylon, false for docking port")]
-    public bool reduceSortinglayer  = true;
+    public bool reduceSortinglayer = true;
     public bool taxiAfterLanding = true;
 
 }

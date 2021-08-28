@@ -34,6 +34,7 @@ public class ship : MonoBehaviour
     public Material normalShipMaterial;
     public Material shipOutlineMaterial;
 
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -60,6 +61,7 @@ public class ship : MonoBehaviour
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
         renderer.material = shipOutlineMaterial;
+        GameManager.Instance.LandingZoneIndicator(landZone);
         isLanding = false;
 
     }
