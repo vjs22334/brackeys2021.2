@@ -25,7 +25,8 @@ public class ship : MonoBehaviour
 
     public Vector3 currDirection; // -1,0,0 
 
-    bool Landed = false;
+    [HideInInspector]
+    public bool Landed = false;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -110,7 +111,7 @@ public class ship : MonoBehaviour
 
     }
 
-    public void LandingProcess(Transform pylonTransform, LandingPylon pylon){
+    public virtual void LandingProcess(Transform pylonTransform, LandingPylon pylon){
         if(Landed){
             return;
         }
@@ -144,7 +145,7 @@ public class ship : MonoBehaviour
         };
     }
 
-    public void DestroyShip()
+    public virtual void DestroyShip()
     {
         //Do vfx here.
         Destroy(gameObject);

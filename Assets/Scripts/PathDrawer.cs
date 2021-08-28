@@ -39,7 +39,7 @@ public class PathDrawer : MonoBehaviour
         {
 
             Collider2D shipCollider = Physics2D.OverlapPoint(currMousePosition, MouseRayCastLayerMask);
-            if (shipCollider != null)
+            if (shipCollider != null && !Ship.Landed)
             {
                 drawing = true;
                 Ship = shipCollider.GetComponent<ship>();

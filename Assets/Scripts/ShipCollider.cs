@@ -42,7 +42,7 @@ public class ShipCollider : MonoBehaviour
             Debug.Log("Wall hit " + _ship.currDirection);
         }
 
-        if (other.CompareTag("Ship"))
+        if (other.CompareTag("Ship")&&!_ship.Landed)
         {
             ShipCollider otherShipCollider = other.GetComponent<ShipCollider>();
             ShipType otherShipType = otherShipCollider.shipType;
@@ -82,6 +82,7 @@ public class ShipCollider : MonoBehaviour
             }
             else if (shipType == ShipType.DEFENDER)
             {
+                Defender defender = GetComponentInParent<Defender>();
                 if (otherShipType == ShipType.DEFENDER && !CollisionProcessed)
                 {
                     //destroy ship
@@ -93,6 +94,12 @@ public class ShipCollider : MonoBehaviour
                 }
                 else if (otherShipType == ShipType.ENEMY)
                 {
+                    if(defender.ammoCount>0){
+                        defender.ammoCount--;
+                    }
+                    else{
+                        _ship.DestroyShip();
+                    }
                     //do score stuff here
                 }
                 else if (otherShipType == ShipType.SHIP)
