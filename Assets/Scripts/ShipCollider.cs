@@ -6,7 +6,7 @@ public class ShipCollider : MonoBehaviour
 
     public bool CollisionProcessed = false;
 
-    private bool FirstTimeWallTrigger = false;
+    public bool FirstTimeWallTrigger = false;
 
     ship _ship;
 
@@ -26,7 +26,7 @@ public class ShipCollider : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("LandZone") && shipType != ShipType.ENEMY)
+        if (other.CompareTag("LandZone") && shipType != ShipType.ENEMY && _ship.isLanding)
         {
             _ship.LandingProcess(other.transform, other.GetComponent<LandingPylon>());
         }
@@ -53,7 +53,7 @@ public class ShipCollider : MonoBehaviour
                 //destroy ship 
                 _ship.DestroyShip();
 
-                GameManager.Instance.RemoveLife();
+
                 //ship will only call for life loss if the other type is also a ship.
                 if (otherShipType == ShipType.SHIP && !CollisionProcessed)
                 {

@@ -6,10 +6,14 @@ public class SpawnSystem : MonoBehaviour
     public SpawnPoint[] spawnPoints;
 
     public GameObject[] ships;
+    public GameObject[] enemyShips;
 
 
     public GameObject defenderShip;
     public Transform defenderSpawnPoint;
+
+    public GameObject offScreenPointer;
+    public GameObject offScreenPointerCanvas;
 
     public bool isGamePlaying
     {
@@ -25,7 +29,7 @@ public class SpawnSystem : MonoBehaviour
             }
         }
     }
-    public float spawningTime = 5f;
+    public float shipSpawningTime = 5f;
 
 
     private int currentPoint;
@@ -47,13 +51,14 @@ public class SpawnSystem : MonoBehaviour
         while (isGamePlaying)
         {
             SpawnShips();
-            yield return new WaitForSeconds(spawningTime);
+            yield return new WaitForSeconds(shipSpawningTime);
         }
     }
 
     public void DefenderSpawn()
     {
         GameObject ship = Instantiate(defenderShip, defenderSpawnPoint.position, Quaternion.identity);
+        ship.GetComponentInChildren<ShipCollider>().FirstTimeWallTrigger = true;
         //ship.GetComponent<Defender>().currDirection = Vector3.up;
         ship.GetComponent<Defender>().Launch();
         ship.transform.localScale *= 0.6f;
@@ -66,6 +71,9 @@ public class SpawnSystem : MonoBehaviour
         Debug.Log("Current Point " + currentPoint);
         GameObject ship = Instantiate(ships[GetRandomShip()], spawnPoints[currentPoint].transform.position, Quaternion.identity);
         ship.GetComponent<ship>().currDirection = GetRandomSpawnPosAndRot();
+        GameObject offscreenIndi = Instantiate(offScreenPointer, offScreenPointerCanvas.transform);
+        offscreenIndi.transform.SetParent(offScreenPointerCanvas.transform);
+        offscreenIndi.GetComponent<ArrowPointer>().targetTransform = ship.transform;
         //ship.GetComponent<ship>().SetSpawnSpeedAndRot(GetRandomShipSpeed(), GetRandomShipRot());
     }
 

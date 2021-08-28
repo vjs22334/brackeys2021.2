@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using CodeMonkey.Utils;
 using UnityEngine;
 using UnityEngine.UI;
-using CodeMonkey.Utils;
 
 public class ArrowPointer : MonoBehaviour
 {
     public Transform targetTransform;
-    
+
 
     public float offset = 200f;
 
     [SerializeField]
     private Camera UICamera;
-    
+
     RectTransform rectTransform;
 
     Image image;
@@ -38,45 +36,52 @@ public class ArrowPointer : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if(targetTransform!=null){
+        if (targetTransform != null)
+        {
             Vector3 fromPosition = mainCam.transform.position;
             Vector3 toPosition = targetTransform.position;
-            fromPosition.z=0;
-            Vector3 dir = (toPosition-fromPosition).normalized;
+            fromPosition.z = 0;
+            Vector3 dir = (targetTransform.GetComponent<ship>().currDirection * -1).normalized;
 
             float angle = UtilsClass.GetAngleFromVector(dir);
 
-            rectTransform.localEulerAngles = new Vector3(0,0,angle);
+            rectTransform.localEulerAngles = new Vector3(0, 0, angle);
 
             Vector3 targetScreenPosition = mainCam.WorldToScreenPoint(toPosition);
-            bool isOffscreen = targetScreenPosition.x<=offset || targetScreenPosition.x>=Screen.width-offset || targetScreenPosition.y<=offset|| targetScreenPosition.y>=Screen.height-offset;
+            bool isOffscreen = targetScreenPosition.x <= offset || targetScreenPosition.x >= Screen.width - offset || targetScreenPosition.y <= offset || targetScreenPosition.y >= Screen.height - offset;
 
-            if(isOffscreen){
+            if (isOffscreen)
+            {
                 image.enabled = true;
                 Vector3 cappedTargetPosition = targetScreenPosition;
-                if(cappedTargetPosition.x <= offset){
+                if (cappedTargetPosition.x <= offset)
+                {
                     cappedTargetPosition.x = offset;
                 }
-                if(cappedTargetPosition.x >= Screen.width-offset){
-                    cappedTargetPosition.x = Screen.width-offset;
+                if (cappedTargetPosition.x >= Screen.width - offset)
+                {
+                    cappedTargetPosition.x = Screen.width - offset;
                 }
-                if( cappedTargetPosition.y <= offset){
+                if (cappedTargetPosition.y <= offset)
+                {
                     cappedTargetPosition.y = offset;
                 }
-                if(cappedTargetPosition.y>=Screen.height-offset){
-                    cappedTargetPosition.y = Screen.height-offset;
+                if (cappedTargetPosition.y >= Screen.height - offset)
+                {
+                    cappedTargetPosition.y = Screen.height - offset;
                 }
 
                 Vector3 pointerWorldPosition = UICamera.ScreenToWorldPoint(cappedTargetPosition);
                 rectTransform.position = pointerWorldPosition;
-                rectTransform.localPosition = new Vector3(rectTransform.localPosition.x,rectTransform.localPosition.y,0);
+                rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, rectTransform.localPosition.y, 0);
             }
-            else{
+            else
+            {
                 image.enabled = false;
             }
 
         }
-       
-    
+
+
     }
 }

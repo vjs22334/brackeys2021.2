@@ -28,6 +28,9 @@ public class ship : MonoBehaviour
     [HideInInspector]
     public bool Landed = false;
 
+    [HideInInspector]
+    public bool isLanding = false;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -54,6 +57,7 @@ public class ship : MonoBehaviour
         pathPoints = new List<Vector3>();
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
+        isLanding = false;
 
     }
 
@@ -167,7 +171,7 @@ public class ship : MonoBehaviour
     //color change to indicate going to land
     public void HeadingToLand()
     {
-
+        isLanding = true;
     }
 
     //collision indicator

@@ -8,6 +8,8 @@ TagManager:
   - LandZone
   - DissapearZone
   - Wall
+  - OffscreenIndicator
+  - Uicamera
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - SelectLayer
   - Shiplayer
   - LandingLayer
-  - 
+  - Proximity
   - 
   - 
   - 
@@ -47,4 +49,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Proximity
+    uniqueID: 2194029367
     locked: 0
