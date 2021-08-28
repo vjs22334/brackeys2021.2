@@ -1,4 +1,6 @@
+using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     public Defender defender;
 
+    public List<SpriteRenderer> landingZoneIndicator;
 
     private static GameManager _instance = null;
     public static GameManager Instance
@@ -124,7 +127,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    public void LandingZoneIndicator(LandZone landZone)
+    {
+        SpriteRenderer curretSpriteRen = null;
+        switch (landZone)
+        {
+            case LandZone.LANDZONE_1:
+                curretSpriteRen = landingZoneIndicator[0];
+                break;
+            case LandZone.LANDZONE_2:
+                curretSpriteRen = landingZoneIndicator[1];
+                break;
+            case LandZone.LANDZONE_3:
+                curretSpriteRen = landingZoneIndicator[2];
+                break;
+        }
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(curretSpriteRen.DOFade(0.1f, 0.3f));
+        sequence.Append(curretSpriteRen.DOFade(0.9f, 0.3f));
+        sequence.SetLoops<Sequence>(2, LoopType.Yoyo);
+    }
 
     public void Pause()
     {

@@ -41,7 +41,7 @@ public class ArrowPointer : MonoBehaviour
             Vector3 fromPosition = mainCam.transform.position;
             Vector3 toPosition = targetTransform.position;
             fromPosition.z = 0;
-            Vector3 dir = (targetTransform.GetComponent<ship>().currDirection * -1).normalized;
+            Vector3 dir = (targetTransform.GetComponent<ship>().currDirection * -1f).normalized;
 
             float angle = UtilsClass.GetAngleFromVector(dir);
 
@@ -80,6 +80,10 @@ public class ArrowPointer : MonoBehaviour
                 image.enabled = false;
             }
 
+        }
+        else
+        {
+            Destroy(gameObject);
         }
 
 

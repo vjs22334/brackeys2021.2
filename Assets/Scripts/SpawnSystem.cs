@@ -96,7 +96,7 @@ public class SpawnSystem : MonoBehaviour
         //Debug.Log("Current Point " + currentPoint);
         GameObject ship = Instantiate(ships[GetRandomShip()], spawnPoints[currentPoint].transform.position, Quaternion.identity);
         ship.GetComponent<ship>().currDirection = GetRandomSpawnPosAndRot();
-        GameObject offscreenIndi = Instantiate(offScreenPointer, offScreenPointerCanvas.transform);
+        GameObject offscreenIndi = Instantiate(ship.GetComponent<ship>().OffScreenIndicator, offScreenPointerCanvas.transform);
         offscreenIndi.transform.SetParent(offScreenPointerCanvas.transform);
         offscreenIndi.GetComponent<ArrowPointer>().targetTransform = ship.transform;
         //ship.GetComponent<ship>().SetSpawnSpeedAndRot(GetRandomShipSpeed(), GetRandomShipRot());

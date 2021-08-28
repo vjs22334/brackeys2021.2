@@ -653,11 +653,9 @@ MonoBehaviour:
   turnspeed: 100
   spriteTransform: {fileID: 1535381122605930899}
   landZone: 0
-  SmokeParticles: {fileID: 0}
+  OffScreenIndicator: {fileID: 17723636113324621, guid: 0b81e4fcece3dee4f8af416964d668cb, type: 3}
   currDirection: {x: 0, y: 0, z: 0}
   Landed: 0
   isLanding: 0
   normalShipMaterial: {fileID: 2100000, guid: b7e39ce7b496a854ca78c3d1a7d8954f, type: 2}
   shipOutlineMaterial: {fileID: 2100000, guid: 2fe4b8783e0d0394b98537002534f344, type: 2}
-  MaxDirectionChangeTime: 4
-  MinDirectionChangeTime: 10

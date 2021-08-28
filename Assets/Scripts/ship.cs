@@ -16,7 +16,7 @@ public class ship : MonoBehaviour
 
     public LandZone landZone;
 
-    public GameObject SmokeParticles;
+    public GameObject OffScreenIndicator;
 
     LineRenderer lineRenderer;
     List<Vector3> pathPoints;
@@ -33,6 +33,7 @@ public class ship : MonoBehaviour
 
     public Material normalShipMaterial;
     public Material shipOutlineMaterial;
+
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -51,7 +52,6 @@ public class ship : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         pathPoints = new List<Vector3>();
-        //SmokeParticles.SetActive(true);
         //currDirection = transform.up;
     }
 
@@ -61,6 +61,7 @@ public class ship : MonoBehaviour
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
         renderer.material = shipOutlineMaterial;
+        GameManager.Instance.LandingZoneIndicator(landZone);
         isLanding = false;
 
     }
