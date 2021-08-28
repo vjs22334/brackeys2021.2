@@ -296,6 +296,8 @@ MonoBehaviour:
   currDirection: {x: 0, y: 0, z: 0}
   Landed: 0
   isLanding: 0
+  normalShipMaterial: {fileID: 2100000, guid: b7e39ce7b496a854ca78c3d1a7d8954f, type: 2}
+  shipOutlineMaterial: {fileID: 2100000, guid: 2fe4b8783e0d0394b98537002534f344, type: 2}
 --- !u!61 &145280084987085591
 BoxCollider2D:
   m_ObjectHideFlags: 0

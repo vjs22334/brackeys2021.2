@@ -8,6 +8,8 @@ public class ShipCollider : MonoBehaviour
 
     public bool FirstTimeWallTrigger = false;
 
+
+
     ship _ship;
 
     /// <summary>

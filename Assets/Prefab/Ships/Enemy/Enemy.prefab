@@ -483,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipType: 0
   CollisionProcessed: 0
+  FirstTimeWallTrigger: 0
 --- !u!1 &1535381123311052856
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,5 +656,8 @@ MonoBehaviour:
   SmokeParticles: {fileID: 0}
   currDirection: {x: 0, y: 0, z: 0}
   Landed: 0
+  isLanding: 0
+  normalShipMaterial: {fileID: 2100000, guid: b7e39ce7b496a854ca78c3d1a7d8954f, type: 2}
+  shipOutlineMaterial: {fileID: 2100000, guid: 2fe4b8783e0d0394b98537002534f344, type: 2}
   MaxDirectionChangeTime: 4
   MinDirectionChangeTime: 10

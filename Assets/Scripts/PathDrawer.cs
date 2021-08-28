@@ -84,6 +84,7 @@ public class PathDrawer : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {
+            Ship.SetTheShipMaterialToNormal();
             positions.Clear();
             if (Ship != null)
                 Ship.deletePoint -= deletePoint;

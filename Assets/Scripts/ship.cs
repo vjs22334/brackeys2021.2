@@ -31,6 +31,9 @@ public class ship : MonoBehaviour
     [HideInInspector]
     public bool isLanding = false;
 
+    public Material normalShipMaterial;
+    public Material shipOutlineMaterial;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -57,8 +60,14 @@ public class ship : MonoBehaviour
         pathPoints = new List<Vector3>();
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
+        renderer.material = shipOutlineMaterial;
         isLanding = false;
 
+    }
+
+    public void SetTheShipMaterialToNormal()
+    {
+        renderer.material = normalShipMaterial;
     }
 
     public void AddPathPoint(Vector3 point)
