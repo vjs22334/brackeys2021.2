@@ -1032,7 +1032,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 150, y: 30}
+  m_Size: {x: 80, y: 30}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2739,6 +2739,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 7173406478187325099, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
+      propertyPath: enemyEndRot.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173406478187325099, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
+      propertyPath: enemyEndRot.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173406478187325099, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
+      propertyPath: enemyStartRot.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173406478187325099, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
+      propertyPath: enemyStartRot.y
+      value: -0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7173406479028422633, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 25
@@ -2751,6 +2767,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -35
       objectReference: {fileID: 0}
+    - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
+      propertyPath: enemyShip
+      value: 
+      objectReference: {fileID: 1535381123311052856, guid: 4c44516571ee35a449772e5d60518a0c, type: 3}
     - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
       propertyPath: defenderShip
       value: 
@@ -2765,7 +2785,11 @@ PrefabInstance:
       objectReference: {fileID: 7054749330372869816, guid: 534472436d7d93249a32e2590fe5e748, type: 3}
     - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
       propertyPath: ships.Array.size
-      value: 7
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
+      propertyPath: enemySpawningTime
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
       propertyPath: defenderSpawnPoint
@@ -2798,7 +2822,7 @@ PrefabInstance:
     - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
       propertyPath: ships.Array.data[6]
       value: 
-      objectReference: {fileID: 1535381123311052856, guid: 4c44516571ee35a449772e5d60518a0c, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
       propertyPath: ships.Array.data[7]
       value: 

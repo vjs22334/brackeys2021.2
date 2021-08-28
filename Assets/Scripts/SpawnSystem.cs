@@ -6,7 +6,7 @@ public class SpawnSystem : MonoBehaviour
     public SpawnPoint[] spawnPoints;
 
     public GameObject[] ships;
-    public GameObject[] enemyShips;
+    public GameObject enemyShip;
 
 
     public GameObject defenderShip;
@@ -30,6 +30,7 @@ public class SpawnSystem : MonoBehaviour
         }
     }
     public float shipSpawningTime = 5f;
+    public float enemySpawningTime = 5f;
 
 
     private int currentPoint;
@@ -43,15 +44,24 @@ public class SpawnSystem : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Spawning());
+        StartCoroutine(ShipSpawning());
+        StartCoroutine(EnemySpawning());
     }
 
-    IEnumerator Spawning()
+    IEnumerator ShipSpawning()
     {
         while (isGamePlaying)
         {
             SpawnShips();
             yield return new WaitForSeconds(shipSpawningTime);
+        }
+    }
+    IEnumerator EnemySpawning()
+    {
+        while (isGamePlaying)
+        {
+            SpawnEnemies();
+            yield return new WaitForSeconds(enemySpawningTime);
         }
     }
 
@@ -65,10 +75,25 @@ public class SpawnSystem : MonoBehaviour
 
     }
 
-    private void SpawnShips()
+    private void GetACurrentSpawnPoint()
     {
         currentPoint = Random.Range(0, spawnPoints.Length);
-        Debug.Log("Current Point " + currentPoint);
+
+    }
+
+    private void SpawnEnemies()
+    {
+        GetACurrentSpawnPoint();
+        GameObject ship = Instantiate(enemyShip, spawnPoints[currentPoint].transform.position, Quaternion.identity);
+        Vector2 vector2 = Random.insideUnitCircle;
+        Vector2 vdir = vector2 * Random.Range(10f, 15f);
+        Vector3 vecDir = new Vector3(vdir.x, vdir.y, 0);
+        ship.GetComponent<ship>().currDirection = (vecDir - ship.transform.position).normalized;
+    }
+    private void SpawnShips()
+    {
+        GetACurrentSpawnPoint();
+        //Debug.Log("Current Point " + currentPoint);
         GameObject ship = Instantiate(ships[GetRandomShip()], spawnPoints[currentPoint].transform.position, Quaternion.identity);
         ship.GetComponent<ship>().currDirection = GetRandomSpawnPosAndRot();
         GameObject offscreenIndi = Instantiate(offScreenPointer, offScreenPointerCanvas.transform);
@@ -77,16 +102,6 @@ public class SpawnSystem : MonoBehaviour
         //ship.GetComponent<ship>().SetSpawnSpeedAndRot(GetRandomShipSpeed(), GetRandomShipRot());
     }
 
-    private float GetRandomShipSpeed()
-    {
-        float speed = Random.Range(3f, 10f);
-        return speed;
-    }
-    private float GetRandomShipRot()
-    {
-        float speed = Random.Range(85f, 150f);
-        return speed;
-    }
 
     private int GetRandomShip()
     {
