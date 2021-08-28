@@ -146,10 +146,29 @@ public class GameManager : MonoBehaviour
                 curretSpriteRen = landingZoneIndicator[2];
                 break;
         }
+        curretSpriteRen.enabled = true;
         Sequence sequence = DOTween.Sequence();
         sequence.Append(curretSpriteRen.DOFade(0.1f, 0.3f));
         sequence.Append(curretSpriteRen.DOFade(0.9f, 0.3f));
-        sequence.SetLoops<Sequence>(2, LoopType.Yoyo);
+        sequence.SetLoops<Sequence>(-1, LoopType.Yoyo);
+    }
+
+    public void ResetLandingZoneIndicator(LandZone landZone){
+        SpriteRenderer curretSpriteRen = null;
+        switch (landZone)
+        {
+            case LandZone.LANDZONE_1:
+                curretSpriteRen = landingZoneIndicator[0];
+                break;
+            case LandZone.LANDZONE_2:
+                curretSpriteRen = landingZoneIndicator[1];
+                break;
+            case LandZone.LANDZONE_3:
+                curretSpriteRen = landingZoneIndicator[2];
+                break;
+        }
+        curretSpriteRen.enabled = false;
+        DOTween.Kill(curretSpriteRen);
     }
 
     public void Pause()

@@ -69,6 +69,7 @@ public class ship : MonoBehaviour
     public void SetTheShipMaterialToNormal()
     {
         renderer.material = normalShipMaterial;
+        GameManager.Instance.ResetLandingZoneIndicator(landZone);
     }
 
     public void AddPathPoint(Vector3 point)
@@ -177,8 +178,8 @@ public class ship : MonoBehaviour
 
     public void DisapearShip()
     {
-        renderer.DOFade(0, 0.5f);
-        Destroy(gameObject, 0.5f);
+        renderer.DOFade(0, 1f);
+        Destroy(gameObject, 1f);
     }
 
     //color change to indicate going to land
