@@ -96,6 +96,8 @@ public class PathDrawer : MonoBehaviour
             }
 
         }
+        float width =  lineRenderer.startWidth;
+        lineRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
     }
 
     void deletePoint(Vector3 point)

@@ -45,11 +45,10 @@ public class ShipCollider : MonoBehaviour
             Debug.Log("Wall hit " + _ship.currDirection);
         }
 
-        if (other.CompareTag("Ship") && !_ship.Landed && FirstTimeWallTrigger)
+        if (other.CompareTag("Ship") && !_ship.Landed && FirstTimeWallTrigger && !other.GetComponentInParent<ship>().Landed)
         {
             ShipCollider otherShipCollider = other.GetComponent<ShipCollider>();
             ShipType otherShipType = otherShipCollider.shipType;
-
             if (shipType == ShipType.SHIP)
             {
                 //destroy ship 

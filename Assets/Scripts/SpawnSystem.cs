@@ -70,6 +70,7 @@ public class SpawnSystem : MonoBehaviour
         GameObject ship = Instantiate(defenderShip, defenderSpawnPoint.position, Quaternion.identity);
         ship.GetComponentInChildren<ShipCollider>().FirstTimeWallTrigger = true;
         GameManager.Instance.defender = ship.GetComponent<Defender>();
+        ship.GetComponent<Defender>().Landed = true;
         GameManager.Instance.launchBtn.interactable = true;
         ship.transform.localScale *= 0.6f;
 
