@@ -113,7 +113,7 @@ public class ship : MonoBehaviour
             float newZ = spriteTransform.localRotation.eulerAngles.z + zRotation;
             spriteTransform.localRotation = Quaternion.Euler(0, 0, newZ);
         }
-        if (pathPoints.Count > 0 && (pathPoints[0] - transform.position).magnitude < 0.01f)
+        if (pathPoints.Count > 0 && (pathPoints[0] - transform.position).magnitude < 0.1f)
         {
 
             deletePoint?.Invoke(pathPoints[0]);
