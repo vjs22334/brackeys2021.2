@@ -523,6 +523,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99070723de945964cb6bee61761def13, type: 3}
+--- !u!1 &1113884756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2832986162415471566, guid: 127832a29240bb04eb1883617b5c433a, type: 3}
+  m_PrefabInstance: {fileID: 1478041653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1113884757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113884756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba2cf495e0e66448ba8f4ca04ede672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  turnspeed: 100
+  spriteTransform: {fileID: 0}
+  landZone: 0
+  SmokeParticles: {fileID: 0}
+  currDirection: {x: 0, y: 0, z: 0}
+  Landed: 0
+  TotalAmmoCount: 0
+  RearmTIme: 0
+  ammoCount: 0
 --- !u!1 &1429662768
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,10 +735,6 @@ PrefabInstance:
     - target: {fileID: 2832986162415471564, guid: 127832a29240bb04eb1883617b5c433a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832986162415471565, guid: 127832a29240bb04eb1883617b5c433a, type: 3}
-      propertyPath: landZone
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2832986162415471566, guid: 127832a29240bb04eb1883617b5c433a, type: 3}
       propertyPath: m_Name
