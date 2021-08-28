@@ -12,6 +12,8 @@ public class ship : MonoBehaviour
 
     public Transform spriteTransform;
 
+    SpriteRenderer renderer;
+
     public LandZone landZone;
 
     LineRenderer lineRenderer;
@@ -22,6 +24,14 @@ public class ship : MonoBehaviour
     public Vector3 currDirection; // -1,0,0 
 
     bool Landed = false;
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        renderer = spriteTransform.GetComponent<SpriteRenderer>();
+    }
 
 
     /// <summary>
@@ -94,7 +104,7 @@ public class ship : MonoBehaviour
 
     }
 
-    public void LandingProcess(Transform pylonTransform, bool pylon){
+    public void LandingProcess(Transform pylonTransform, LandingPylon pylon){
         if(Landed){
             return;
         }
@@ -109,14 +119,21 @@ public class ship : MonoBehaviour
 
         transform.DOScale(new Vector3(0.6f,0.6f,0.6f),1f);
         spriteTransform.DOLocalRotate(new Vector3(0,0,pylonTransform.localEulerAngles.z),1f);
-        if(!pylon){
+        if(!pylon.reduceSortinglayer){
             spriteTransform.GetComponent<SpriteRenderer>().sortingOrder = -10;
         }
         transform.DOMove(pylonTransform.position,1f).onComplete += ()=>{
-            transform.DOMove(transform.position+pylonTransform.up*2f,1f).onComplete += () => {
-                DestroyShip();
+            if(pylon.taxiAfterLanding){
+                transform.DOMove(transform.position+pylonTransform.up*2f,1f).onComplete += () => {
+                    DisapearShip();
+                    GameManager.Instance.AddScore(true);
+                };
+            }
+            else{
+                DisapearShip();
                 GameManager.Instance.AddScore(true);
-            };
+            }
+            
             
         };
     }
@@ -124,6 +141,11 @@ public class ship : MonoBehaviour
     public void DestroyShip()
     {
         //Do vfx here.
+        Destroy(gameObject);
+    }
+
+    public void DisapearShip(){
+        renderer.DOFade(0,0.5f);
         Destroy(gameObject);
     }
 
