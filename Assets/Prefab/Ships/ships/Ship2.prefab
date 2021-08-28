@@ -372,7 +372,7 @@ MonoBehaviour:
   turnspeed: 300
   spriteTransform: {fileID: 145280084215329469}
   landZone: 0
-  SmokeParticles: {fileID: 0}
+  OffScreenIndicator: {fileID: 17723636113324621, guid: 9c3ea1ed436ca544d91de2a367b0bb10, type: 3}
   currDirection: {x: 0, y: 0, z: 0}
   Landed: 0
   isLanding: 0
