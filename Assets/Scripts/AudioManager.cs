@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip backgroundMusic;
-    public AudioClip gameMusic;
+    //public AudioClip gameMusic;
 
     public List<AudioClip> soundEffects;
 
@@ -56,15 +56,16 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeMusic(CurrentScene current)
     {
-        switch (current)
-        {
-            case CurrentScene.MAINMENU:
-                bgMusicSource.clip = backgroundMusic;
-                break;
-            case CurrentScene.LEVEL1:
-                bgMusicSource.clip = gameMusic;
-                break;
-        }
+        //switch (current)
+        //{
+        //    case CurrentScene.MAINMENU:
+        //        bgMusicSource.clip = backgroundMusic;
+        //        break;
+        //    case CurrentScene.LEVEL1:
+        //        bgMusicSource.clip = gameMusic;
+        //        break;
+        //}
+        bgMusicSource.clip = backgroundMusic;
     }
 
     public void PlayTheSoundEffect(TypesOfSoundEffect typesOfSoundEffect)
