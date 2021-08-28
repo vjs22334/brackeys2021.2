@@ -135,6 +135,8 @@ public class ship : MonoBehaviour
         Landed = true;
         clearpath();
 
+        
+
         //hack to reset transform rotation,
         spriteTransform.SetParent(null, true);
         transform.rotation = Quaternion.identity;
@@ -163,6 +165,8 @@ public class ship : MonoBehaviour
                 GameManager.Instance.AddScore(true);
             }
 
+            AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.SHIPLANDED);
+
 
         };
     }
@@ -173,6 +177,7 @@ public class ship : MonoBehaviour
         if(explosionEffect!=null){
             Instantiate(explosionEffect,transform.position,Quaternion.identity);
         }
+        AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.SHIPDESTROY);
         Destroy(gameObject);
     }
 

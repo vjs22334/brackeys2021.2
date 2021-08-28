@@ -4850,7 +4850,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundMusic: {fileID: 8300000, guid: a028a861c08abfa469233bfb366df367, type: 3}
-  soundEffects: []
+  soundEffects:
+  - {fileID: 8300000, guid: 8bf7be4ecfa9eff4fa4c9d4fe8a8fb7f, type: 3}
+  - {fileID: 8300000, guid: d6c671d9ed21f6240833e2b422e707ca, type: 3}
+  - {fileID: 8300000, guid: 62a94e4aee728054dac996739dda1087, type: 3}
+  - {fileID: 8300000, guid: 0eabbc7ca663252469baa1df66c5790e, type: 3}
   bgMusicSource: {fileID: 1270909736}
   soundEffecrSource: {fileID: 2129700490}
 --- !u!82 &1270909736

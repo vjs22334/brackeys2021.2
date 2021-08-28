@@ -56,15 +56,6 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeMusic(CurrentScene current)
     {
-        //switch (current)
-        //{
-        //    case CurrentScene.MAINMENU:
-        //        bgMusicSource.clip = backgroundMusic;
-        //        break;
-        //    case CurrentScene.LEVEL1:
-        //        bgMusicSource.clip = gameMusic;
-        //        break;
-        //}
         bgMusicSource.clip = backgroundMusic;
         bgMusicSource.Play();
     }
@@ -74,23 +65,19 @@ public class AudioManager : MonoBehaviour
         switch (typesOfSoundEffect)
         {
             case TypesOfSoundEffect.GAMESTART:
-                soundEffecrSource.clip = soundEffects[0];
+                soundEffecrSource.PlayOneShot(soundEffects[0]);
                 break;
 
             case TypesOfSoundEffect.GAMEOVER:
-                soundEffecrSource.clip = soundEffects[1];
+                soundEffecrSource.PlayOneShot(soundEffects[1]);
                 break;
             case TypesOfSoundEffect.SHIPDESTROY:
-                soundEffecrSource.clip = soundEffects[2];
+                soundEffecrSource.PlayOneShot(soundEffects[2]);
                 break;
 
             case TypesOfSoundEffect.SHIPLANDED:
-                soundEffecrSource.clip = soundEffects[3];
+                soundEffecrSource.PlayOneShot(soundEffects[3]);
                 break;
-            case TypesOfSoundEffect.COMET:
-                soundEffecrSource.clip = soundEffects[4];
-                break;
-
         }
     }
 

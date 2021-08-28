@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         ReArmDefender();
         spawnTimeDecreasePerEnemy = (maxenemySpawnTime-minEnemySpawntime)/maxEnemyEscaped;
         spawnSystem.enemySpawningTime = maxenemySpawnTime;
+        AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMESTART);
     }
 
 
@@ -249,5 +250,6 @@ public class GameManager : MonoBehaviour
         isPlaying = false;
         GameOverUI.SetActive(true);
         Time.timeScale = 0;
+        AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMEOVER);
     }
 }
