@@ -26,8 +26,9 @@ public class ShipCollider : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("LandZone")&&shipType!=ShipType.ENEMY){
-            _ship.LandingProcess(other.transform,other.GetComponent<LandingPylon>());
+        if (other.CompareTag("LandZone") && shipType != ShipType.ENEMY)
+        {
+            _ship.LandingProcess(other.transform, other.GetComponent<LandingPylon>());
         }
 
         if (other.CompareTag("Wall"))
@@ -42,7 +43,7 @@ public class ShipCollider : MonoBehaviour
             Debug.Log("Wall hit " + _ship.currDirection);
         }
 
-        if (other.CompareTag("Ship")&&!_ship.Landed)
+        if (other.CompareTag("Ship") && !_ship.Landed)
         {
             ShipCollider otherShipCollider = other.GetComponent<ShipCollider>();
             ShipType otherShipType = otherShipCollider.shipType;
@@ -52,11 +53,11 @@ public class ShipCollider : MonoBehaviour
                 //destroy ship 
                 _ship.DestroyShip();
 
-                //call Gamemanager to lose a life.
+                GameManager.Instance.RemoveLife();
                 //ship will only call for life loss if the other type is also a ship.
                 if (otherShipType == ShipType.SHIP && !CollisionProcessed)
                 {
-                    //do life stuff here
+                    GameManager.Instance.RemoveLife();
                     otherShipCollider.CollisionProcessed = true;// this will prevent double counting
                 }
             }
@@ -75,7 +76,7 @@ public class ShipCollider : MonoBehaviour
                 }
                 else if (otherShipType == ShipType.SHIP)
                 {
-                    //call gamemanager to lose a life
+                    GameManager.Instance.RemoveLife();
 
                     //Do shoot animation if any.
                 }
@@ -88,26 +89,28 @@ public class ShipCollider : MonoBehaviour
                     //destroy ship
                     _ship.DestroyShip();
 
-                    //do life stuff here
+                    GameManager.Instance.RemoveLife();
                     otherShipCollider.CollisionProcessed = true;// this will prevent double counting
 
                 }
                 else if (otherShipType == ShipType.ENEMY)
                 {
-                    if(defender.ammoCount>0){
+                    if (defender.ammoCount > 0)
+                    {
                         defender.ammoCount--;
                     }
-                    else{
+                    else
+                    {
                         _ship.DestroyShip();
                     }
-                    //do score stuff here
+                    GameManager.Instance.AddScore(false);
                 }
                 else if (otherShipType == ShipType.SHIP)
                 {
                     //destroy ship
                     _ship.DestroyShip();
 
-                    //call gamemanager to lose a life
+                    GameManager.Instance.RemoveLife();
 
 
                 }

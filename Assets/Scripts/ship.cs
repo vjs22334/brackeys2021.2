@@ -45,7 +45,7 @@ public class ship : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         pathPoints = new List<Vector3>();
-        SmokeParticles.SetActive(true);
+        //SmokeParticles.SetActive(true);
         //currDirection = transform.up;
     }
 
@@ -111,8 +111,10 @@ public class ship : MonoBehaviour
 
     }
 
-    public virtual void LandingProcess(Transform pylonTransform, LandingPylon pylon){
-        if(Landed){
+    public virtual void LandingProcess(Transform pylonTransform, LandingPylon pylon)
+    {
+        if (Landed)
+        {
             return;
         }
         Landed = true;
@@ -124,24 +126,29 @@ public class ship : MonoBehaviour
         spriteTransform.SetParent(transform, true);
 
 
-        transform.DOScale(new Vector3(0.6f,0.6f,0.6f),1f);
-        spriteTransform.DOLocalRotate(new Vector3(0,0,pylonTransform.localEulerAngles.z),1f);
-        if(!pylon.reduceSortinglayer){
+        transform.DOScale(new Vector3(0.6f, 0.6f, 0.6f), 1f);
+        spriteTransform.DOLocalRotate(new Vector3(0, 0, pylonTransform.localEulerAngles.z), 1f);
+        if (pylon.reduceSortinglayer)
+        {
             spriteTransform.GetComponent<SpriteRenderer>().sortingOrder = -10;
         }
-        transform.DOMove(pylonTransform.position,1f).onComplete += ()=>{
-            if(pylon.taxiAfterLanding){
-                transform.DOMove(transform.position+pylonTransform.up*2f,1f).onComplete += () => {
+        transform.DOMove(pylonTransform.position, 1f).onComplete += () =>
+        {
+            if (pylon.taxiAfterLanding)
+            {
+                transform.DOMove(transform.position + pylonTransform.up * 2f, 1f).onComplete += () =>
+                {
                     DisapearShip();
                     GameManager.Instance.AddScore(true);
                 };
             }
-            else{
+            else
+            {
                 DisapearShip();
                 GameManager.Instance.AddScore(true);
             }
-            
-            
+
+
         };
     }
 
@@ -151,9 +158,10 @@ public class ship : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void DisapearShip(){
-        renderer.DOFade(0,0.5f);
-        Destroy(gameObject);
+    public void DisapearShip()
+    {
+        renderer.DOFade(0, 0.5f);
+        Destroy(gameObject, 0.5f);
     }
 
     //color change to indicate going to land

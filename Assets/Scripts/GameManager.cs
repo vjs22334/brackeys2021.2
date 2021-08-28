@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -22,6 +23,10 @@ public class GameManager : MonoBehaviour
     int score;
 
     public bool isPlaying;
+
+    public int defenderRearmTime = 5;
+    public int currentRearmTime = 5;
+    public bool defenderSpawned = false;
 
 
     private static GameManager _instance = null;
@@ -60,7 +65,37 @@ public class GameManager : MonoBehaviour
         UpdatelivesUI();
         Time.timeScale = 1;
         isPlaying = true;
+        RearmingDefender();
     }
+
+
+
+    public void ReArmDefender()
+    {
+        defenderSpawned = false;
+        StartCoroutine(RearmingDefender());
+    }
+
+    IEnumerator RearmingDefender()
+    {
+        while (!defenderSpawned)
+        {
+            if (currentRearmTime > 0)
+            {
+                yield return new WaitForSeconds(1f);
+                currentRearmTime -= 1;
+                //If you want to add UI to show countdown for defender
+            }
+            else
+            {
+                currentRearmTime = defenderRearmTime; ;
+                spawnSystem.DefenderSpawn();
+                defenderSpawned = true;
+            }
+        }
+    }
+
+
 
     public void Pause()
     {

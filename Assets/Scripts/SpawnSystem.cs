@@ -7,6 +7,10 @@ public class SpawnSystem : MonoBehaviour
 
     public GameObject[] ships;
 
+
+    public GameObject defenderShip;
+    public Transform defenderSpawnPoint;
+
     public bool isGamePlaying
     {
         get
@@ -45,6 +49,15 @@ public class SpawnSystem : MonoBehaviour
             SpawnShips();
             yield return new WaitForSeconds(spawningTime);
         }
+    }
+
+    public void DefenderSpawn()
+    {
+        GameObject ship = Instantiate(defenderShip, defenderSpawnPoint.position, Quaternion.identity);
+        //ship.GetComponent<Defender>().currDirection = Vector3.up;
+        ship.GetComponent<Defender>().Launch();
+        ship.transform.localScale *= 0.6f;
+
     }
 
     private void SpawnShips()

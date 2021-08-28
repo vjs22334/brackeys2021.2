@@ -500,6 +500,7 @@ MonoBehaviour:
   landZone: 0
   SmokeParticles: {fileID: 608976402303348117}
   currDirection: {x: 0, y: 0, z: 0}
+  Landed: 0
 --- !u!61 &145280084987085591
 BoxCollider2D:
   m_ObjectHideFlags: 0

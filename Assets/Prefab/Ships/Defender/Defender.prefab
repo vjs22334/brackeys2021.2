@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2832986162415471564}
-  - component: {fileID: 2832986162415471565}
+  - component: {fileID: 1473000616322619131}
   - component: {fileID: 2832986162415471567}
   - component: {fileID: 2832986162415471562}
   - component: {fileID: 2889870743829701313}
@@ -358,7 +358,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2832986162415471565
+--- !u!114 &1473000616322619131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -367,14 +367,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2832986162415471566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1d829678cdcbc4e818cd251001ef44, type: 3}
+  m_Script: {fileID: 11500000, guid: cba2cf495e0e66448ba8f4ca04ede672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  turnspeed: 50
+  moveSpeed: 10
+  turnspeed: 100
   spriteTransform: {fileID: 2832986162246777445}
-  landZone: 0
+  landZone: 3
+  SmokeParticles: {fileID: 0}
   currDirection: {x: 0, y: 0, z: 0}
+  Landed: 0
+  TotalAmmoCount: 5
+  RearmTIme: 1
+  ammoCount: 0
 --- !u!61 &2832986162415471567
 BoxCollider2D:
   m_ObjectHideFlags: 0

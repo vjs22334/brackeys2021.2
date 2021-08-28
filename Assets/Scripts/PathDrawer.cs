@@ -39,12 +39,16 @@ public class PathDrawer : MonoBehaviour
         {
 
             Collider2D shipCollider = Physics2D.OverlapPoint(currMousePosition, MouseRayCastLayerMask);
-            if (shipCollider != null && !Ship.Landed)
+
+            if (shipCollider != null)
             {
-                drawing = true;
                 Ship = shipCollider.GetComponent<ship>();
-                Ship.SetNewPath();
-                Ship.deletePoint += deletePoint;
+                if (!Ship.Landed)
+                {
+                    drawing = true;
+                    Ship.SetNewPath();
+                    Ship.deletePoint += deletePoint;
+                }
             }
         }
 
@@ -81,7 +85,7 @@ public class PathDrawer : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             positions.Clear();
-            if(Ship!=null)
+            if (Ship != null)
                 Ship.deletePoint -= deletePoint;
             Ship = null;
             if (drawing)
@@ -93,8 +97,9 @@ public class PathDrawer : MonoBehaviour
         }
     }
 
-    void deletePoint(Vector3 point){
-        if(positions.Count == 0)
+    void deletePoint(Vector3 point)
+    {
+        if (positions.Count == 0)
             return;
         positions.RemoveAt(0);
         lineRenderer.positionCount = positions.Count;

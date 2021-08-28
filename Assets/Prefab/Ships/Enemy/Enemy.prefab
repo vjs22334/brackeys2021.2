@@ -648,11 +648,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428f3a52dbba58b42b1fb0caa3d285fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 1.5
   turnspeed: 100
   spriteTransform: {fileID: 1535381122605930899}
   landZone: 0
   SmokeParticles: {fileID: 0}
   currDirection: {x: 0, y: 0, z: 0}
+  Landed: 0
   MaxDirectionChangeTime: 4
   MinDirectionChangeTime: 10
