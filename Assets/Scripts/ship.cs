@@ -6,7 +6,7 @@ using UnityEngine;
 public class ship : MonoBehaviour
 {
 
-    public event Action<Vector3> deletePoint = delegate{};
+    public event Action<Vector3> deletePoint = delegate { };
     public float moveSpeed = 5f;
     public float turnspeed = 100f;
 
@@ -15,6 +15,8 @@ public class ship : MonoBehaviour
     SpriteRenderer renderer;
 
     public LandZone landZone;
+
+    public GameObject SmokeParticles;
 
     LineRenderer lineRenderer;
     List<Vector3> pathPoints;
@@ -42,6 +44,7 @@ public class ship : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         pathPoints = new List<Vector3>();
+        SmokeParticles.SetActive(true);
         //currDirection = transform.up;
     }
 
@@ -50,15 +53,16 @@ public class ship : MonoBehaviour
         pathPoints = new List<Vector3>();
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
-        
+
     }
 
-    public void AddPathPoint(Vector3 point){
+    public void AddPathPoint(Vector3 point)
+    {
         pathPoints.Add(point);
         lineRenderer.positionCount = pathPoints.Count;
         lineRenderer.SetPositions(pathPoints.ToArray());
     }
-    
+
 
     public void clearpath()
     {
@@ -82,25 +86,27 @@ public class ship : MonoBehaviour
             currDirection.z = 0;
             currDirection = currDirection.normalized;
         }
-      
+
 
         transform.position += currDirection * moveSpeed * Time.deltaTime;
         float angleDiff = Vector2.SignedAngle(spriteTransform.up, currDirection);
-        if(Mathf.Abs(angleDiff) > 1f){
+        if (Mathf.Abs(angleDiff) > 1f)
+        {
             float zRotation = Mathf.Sign(angleDiff) * turnspeed * Time.deltaTime;
             zRotation = Mathf.Clamp(zRotation, -1 * Mathf.Abs(angleDiff), Mathf.Abs(angleDiff));
             float newZ = spriteTransform.localRotation.eulerAngles.z + zRotation;
             spriteTransform.localRotation = Quaternion.Euler(0, 0, newZ);
         }
-        if (pathPoints.Count > 0 && (pathPoints[0] - transform.position).magnitude < 0.01f){
-            
+        if (pathPoints.Count > 0 && (pathPoints[0] - transform.position).magnitude < 0.01f)
+        {
+
             deletePoint?.Invoke(pathPoints[0]);
             pathPoints.RemoveAt(0);
             lineRenderer.positionCount = pathPoints.Count;
             lineRenderer.SetPositions(pathPoints.ToArray());
         }
-                
-        
+
+
 
     }
 
