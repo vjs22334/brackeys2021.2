@@ -291,7 +291,7 @@ MonoBehaviour:
   moveSpeed: 2
   turnspeed: 500
   spriteTransform: {fileID: 145280084215329469}
-  landZone: 1
+  landZone: 2
   OffScreenIndicator: {fileID: 17723636113324621, guid: cbdfeb9ebe7821749892c1dd641566a5, type: 3}
   currDirection: {x: 0, y: 0, z: 0}
   Landed: 0
@@ -516,7 +516,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: 6806bb439a9f40e4e8da1e2c5ac21ad2, type: 3}
   m_Color: {r: 0.9811321, g: 0.1527234, b: 0.1527234, a: 0.2}
   m_FlipX: 0
   m_FlipY: 0

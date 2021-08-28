@@ -692,7 +692,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1166627040}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LaunchDefender
         m_Mode: 1
@@ -1614,8 +1614,8 @@ MonoBehaviour:
   maxEnemyEscaped: 5
   ScoreText: {fileID: 626471627}
   LivesText: {fileID: 908747242}
-  EnemiesEscapedText: {fileID: 0}
-  launchBtn: {fileID: 0}
+  EnemiesEscapedText: {fileID: 1732195499}
+  launchBtn: {fileID: 456227100}
   PauseUI: {fileID: 816487157}
   GameOverUI: {fileID: 1563047849}
   isPlaying: 0

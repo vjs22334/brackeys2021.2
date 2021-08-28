@@ -78,6 +78,7 @@ public class ArrowPointer : MonoBehaviour
             else
             {
                 image.enabled = false;
+                Destroy(gameObject);
             }
 
         }
