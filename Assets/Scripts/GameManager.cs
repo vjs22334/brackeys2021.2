@@ -109,9 +109,10 @@ public class GameManager : MonoBehaviour
         if (GameMode.Instance.modeType == GameType.ENEMY)
         {
             ReArmDefender();
-            spawnTimeDecreasePerEnemy = (maxenemySpawnTime - minEnemySpawntime) / maxEnemyEscaped;
+            spawnTimeDecreasePerEnemy = (float)(maxenemySpawnTime - minEnemySpawntime) /(float) maxEnemyEscaped;
             spawnSystem.enemySpawningTime = maxenemySpawnTime;
             EnemiesEscapedText.text = enemyEscapedCount.ToString();
+            currEnemySpawnTime = maxenemySpawnTime;
         }
         else if (GameMode.Instance.modeType == GameType.FRIENDLY)
         {
@@ -279,7 +280,7 @@ public class GameManager : MonoBehaviour
         {
             enemyEscapedCount++;
             EnemiesEscapedText.text = enemyEscapedCount.ToString();
-            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime - spawnTimeDecreasePerEnemy, minEnemySpawntime, maxEnemyEscaped);
+            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime - spawnTimeDecreasePerEnemy, minEnemySpawntime, maxenemySpawnTime);
             spawnSystem.enemySpawningTime = currEnemySpawnTime;
         }
 
@@ -290,7 +291,7 @@ public class GameManager : MonoBehaviour
         {
             enemyEscapedCount--;
             EnemiesEscapedText.text = enemyEscapedCount.ToString();
-            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime + spawnTimeDecreasePerEnemy, minEnemySpawntime, maxEnemyEscaped);
+            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime + spawnTimeDecreasePerEnemy, minEnemySpawntime, maxenemySpawnTime);
             spawnSystem.enemySpawningTime = currEnemySpawnTime;
         }
 

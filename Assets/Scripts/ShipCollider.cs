@@ -135,6 +135,7 @@ public class ShipCollider : MonoBehaviour
             else
             {
                 GameManager.Instance.EnemyEscaped();
+                Destroy(transform.parent.gameObject);
             }
         }
     }
