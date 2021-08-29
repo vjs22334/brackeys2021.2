@@ -1840,7 +1840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bf4ed83a0e41345b5a354b56002fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modeType: 0
 --- !u!4 &1094613421
 Transform:
   m_ObjectHideFlags: 0
@@ -1982,10 +1981,6 @@ MonoBehaviour:
   maxenemySpawnTime: 60
   minEnemySpawntime: 10
   maxEnemyEscaped: 5
-  PlayAgainButton: {fileID: 1709539512}
-  ResumeButton: {fileID: 1675100174}
-  MainMenuPauseButton: {fileID: 1186899773}
-  MainMenuGameOverButton: {fileID: 1871686822}
   ScoreText: {fileID: 626471627}
   LivesText: {fileID: 908747242}
   EnemiesEscapedText: {fileID: 1732195499}
@@ -3976,6 +3971,10 @@ PrefabInstance:
       propertyPath: offScreenPointer
       value: 
       objectReference: {fileID: 7054749330372869816, guid: 534472436d7d93249a32e2590fe5e748, type: 3}
+    - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
+      propertyPath: shipSpawningTime
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7173406479894275972, guid: e6388cf3665803e4d84a80eceffc9e6f, type: 3}
       propertyPath: ships.Array.size
       value: 6
