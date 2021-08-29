@@ -45,7 +45,8 @@ public class SpawnSystem : MonoBehaviour
     private void Start()
     {
         StartCoroutine(ShipSpawning());
-        StartCoroutine(EnemySpawning());
+        if (SceneHandler.Instance.modeType == ModeType.ENEMY)
+            StartCoroutine(EnemySpawning());
     }
 
     IEnumerator ShipSpawning()
