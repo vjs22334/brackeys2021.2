@@ -58,7 +58,7 @@ public class SceneHandler : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
-        AudioManager.Instance.ChangeMusic(CurrentScene.MAINMENU);
+
     }
 
 
