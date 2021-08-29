@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
             ReArmDefender();
             spawnTimeDecreasePerEnemy = (maxenemySpawnTime - minEnemySpawntime) / maxEnemyEscaped;
             spawnSystem.enemySpawningTime = maxenemySpawnTime;
+            EnemiesEscapedText.text = enemyEscapedCount.ToString();
         }
         else if (GameMode.Instance.modeType == GameType.FRIENDLY)
         {
