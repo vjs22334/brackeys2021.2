@@ -2,12 +2,15 @@ using TMPro;
 using UnityEngine;
 public class MainMenuHighScore : MonoBehaviour
 {
-    public TMP_Text highScoretext;
+    public TMP_Text normalModeScoretext;
+    public TMP_Text defenderModeScoretext;
 
 
     private void Start()
     {
-        highScoretext.text = "HIGHSCORE - " + PlayerPrefs.GetInt("HighScore", 0);
+        normalModeScoretext.text = "HOMEBASE - " + PlayerPrefs.GetInt("FriendlyMode", 0);
+        defenderModeScoretext.text = "FRONTLINE - " + PlayerPrefs.GetInt("EnemyMode", 0);
+
     }
 
 

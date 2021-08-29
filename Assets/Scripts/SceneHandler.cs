@@ -32,6 +32,7 @@ public class SceneHandler : MonoBehaviour
     public void MainMenu()
     {
         AudioManager.Instance.StopSoundEffect();
+        GameManager.Instance.CheckHighScoreAndUpdate();
         SceneManager.LoadScene("MainMenu");
 
     }

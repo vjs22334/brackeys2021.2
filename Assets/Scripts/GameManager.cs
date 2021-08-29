@@ -104,12 +104,17 @@ public class GameManager : MonoBehaviour
 
 
         AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMESTART);
+        if (GameMode.Instance.modeType == GameType.FRIENDLY)
+            highScore = PlayerPrefs.GetInt("FriendlyMode", 0);
 
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        else if (GameMode.Instance.modeType == GameType.ENEMY)
+            highScore = PlayerPrefs.GetInt("EnemyMode", 0);
+
+
         if (GameMode.Instance.modeType == GameType.ENEMY)
         {
             ReArmDefender();
-            spawnTimeDecreasePerEnemy = (float)(maxenemySpawnTime - minEnemySpawntime) /(float) maxEnemyEscaped;
+            spawnTimeDecreasePerEnemy = (float)(maxenemySpawnTime - minEnemySpawntime) / (float)maxEnemyEscaped;
             spawnSystem.enemySpawningTime = maxenemySpawnTime;
             EnemiesEscapedText.text = enemyEscapedCount.ToString();
             currEnemySpawnTime = maxenemySpawnTime;
@@ -303,13 +308,21 @@ public class GameManager : MonoBehaviour
         GameOverUI.SetActive(true);
         Time.timeScale = 0;
         AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMEOVER);
+        CheckHighScoreAndUpdate();
+        GameOverScoreText.text += score;
+        GameOverScoreHighScoreText.text += highScore;
+    }
+
+    public void CheckHighScoreAndUpdate()
+    {
         if (score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetInt("HighScore", score);
+            if (GameMode.Instance.modeType == GameType.FRIENDLY)
+                PlayerPrefs.SetInt("FriendlyMode", score);
+            else if (GameMode.Instance.modeType == GameType.ENEMY)
+                PlayerPrefs.SetInt("EnemyMode", score);
             PlayerPrefs.Save();
         }
-        GameOverScoreText.text += score;
-        GameOverScoreHighScoreText.text += highScore;
     }
 }
