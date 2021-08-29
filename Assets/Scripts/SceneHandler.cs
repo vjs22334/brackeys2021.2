@@ -3,11 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-    public void PlayTheGame()
+    public void PlayTheFriendlyMode()
     {
         SceneManager.LoadScene("GameTest");
-        AudioManager.Instance.ChangeMusic(CurrentScene.LEVEL1);
     }
+
+    public void PlayTheDefendingMode()
+    {
+        SceneManager.LoadScene("GameTest");//Change the scene name here
+    }
+
 
     public void QuitTheGame()
     {
