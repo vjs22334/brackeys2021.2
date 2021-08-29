@@ -33,7 +33,7 @@ public class ShipCollider : MonoBehaviour
             _ship.LandingProcess(other.transform, other.GetComponent<LandingPylon>());
         }
 
-        if (other.CompareTag("Wall")&&shipType!=ShipType.ENEMY)
+        if (other.CompareTag("Wall") && shipType != ShipType.ENEMY)
         {
             if (!FirstTimeWallTrigger)
                 FirstTimeWallTrigger = true;
@@ -128,7 +128,7 @@ public class ShipCollider : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Wall")&&shipType==ShipType.ENEMY)
+        if (other.CompareTag("Wall") && shipType == ShipType.ENEMY)
         {
             if (!FirstTimeWallTrigger)
                 FirstTimeWallTrigger = true;

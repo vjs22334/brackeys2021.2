@@ -97,11 +97,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         isPlaying = true;
         ReArmDefender();
-        spawnTimeDecreasePerEnemy = (maxenemySpawnTime-minEnemySpawntime)/maxEnemyEscaped;
+        spawnTimeDecreasePerEnemy = (maxenemySpawnTime - minEnemySpawntime) / maxEnemyEscaped;
         spawnSystem.enemySpawningTime = maxenemySpawnTime;
         AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMESTART);
 
-        highScore = PlayerPrefs.GetInt("HighScore",0);
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
 
@@ -114,8 +114,10 @@ public class GameManager : MonoBehaviour
         launchBtn.interactable = false;
     }
 
-    public void LaunchDefender(){
-        if(defender!=null){
+    public void LaunchDefender()
+    {
+        if (defender != null)
+        {
             defender.Launch();
         }
     }
@@ -153,6 +155,9 @@ public class GameManager : MonoBehaviour
             case LandZone.LANDZONE_3:
                 curretSpriteRen = landingZoneIndicator[2];
                 break;
+            case LandZone.LANDZONE_4:
+                curretSpriteRen = landingZoneIndicator[3];
+                break;
         }
         curretSpriteRen.enabled = true;
         Sequence sequence = DOTween.Sequence();
@@ -161,7 +166,8 @@ public class GameManager : MonoBehaviour
         sequence.SetLoops<Sequence>(-1, LoopType.Yoyo);
     }
 
-    public void ResetLandingZoneIndicator(LandZone landZone){
+    public void ResetLandingZoneIndicator(LandZone landZone)
+    {
         SpriteRenderer curretSpriteRen = null;
         switch (landZone)
         {
@@ -173,6 +179,9 @@ public class GameManager : MonoBehaviour
                 break;
             case LandZone.LANDZONE_3:
                 curretSpriteRen = landingZoneIndicator[2];
+                break;
+            case LandZone.LANDZONE_4:
+                curretSpriteRen = landingZoneIndicator[3];
                 break;
         }
         curretSpriteRen.enabled = false;
@@ -233,23 +242,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EnemyEscaped(){
-        if(enemyEscapedCount<maxEnemyEscaped){
+    public void EnemyEscaped()
+    {
+        if (enemyEscapedCount < maxEnemyEscaped)
+        {
             enemyEscapedCount++;
             EnemiesEscapedText.text = enemyEscapedCount.ToString();
-            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime-spawnTimeDecreasePerEnemy,minEnemySpawntime,maxEnemyEscaped);
+            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime - spawnTimeDecreasePerEnemy, minEnemySpawntime, maxEnemyEscaped);
             spawnSystem.enemySpawningTime = currEnemySpawnTime;
         }
-            
+
     }
-    public void EnemyDestroyed(){
-        if(enemyEscapedCount>0){
+    public void EnemyDestroyed()
+    {
+        if (enemyEscapedCount > 0)
+        {
             enemyEscapedCount--;
             EnemiesEscapedText.text = enemyEscapedCount.ToString();
-            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime+spawnTimeDecreasePerEnemy,minEnemySpawntime,maxEnemyEscaped);
+            currEnemySpawnTime = Mathf.Clamp(currEnemySpawnTime + spawnTimeDecreasePerEnemy, minEnemySpawntime, maxEnemyEscaped);
             spawnSystem.enemySpawningTime = currEnemySpawnTime;
         }
-            
+
     }
 
     private void GameOver()
@@ -258,9 +271,10 @@ public class GameManager : MonoBehaviour
         GameOverUI.SetActive(true);
         Time.timeScale = 0;
         AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMEOVER);
-        if(score > highScore){
+        if (score > highScore)
+        {
             highScore = score;
-            PlayerPrefs.SetInt("HighScore",score);
+            PlayerPrefs.SetInt("HighScore", score);
             PlayerPrefs.Save();
         }
         GameOverScoreText.text += score;

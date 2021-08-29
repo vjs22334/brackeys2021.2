@@ -14,7 +14,8 @@ public class SceneHandler : MonoBehaviour
         Application.Quit();
     }
 
-    public void PlayAgain(){
+    public void PlayAgain()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
