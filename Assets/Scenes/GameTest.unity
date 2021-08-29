@@ -1982,6 +1982,10 @@ MonoBehaviour:
   maxenemySpawnTime: 60
   minEnemySpawntime: 10
   maxEnemyEscaped: 5
+  PlayAgainButton: {fileID: 1709539512}
+  ResumeButton: {fileID: 1675100174}
+  MainMenuPauseButton: {fileID: 1186899773}
+  MainMenuGameOverButton: {fileID: 1871686822}
   ScoreText: {fileID: 626471627}
   LivesText: {fileID: 908747242}
   EnemiesEscapedText: {fileID: 1732195499}

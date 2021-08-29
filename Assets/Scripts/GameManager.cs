@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
     float currEnemySpawnTime;
 
 
+    //[Header("Panel Buttons")]
+    //public Button PlayAgainButton;
+    //public Button ResumeButton;
+    //public Button MainMenuPauseButton;
+    //public Button MainMenuGameOverButton;
 
 
     [Header("UI References")]
@@ -101,20 +106,29 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMESTART);
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-        if (SceneHandler.Instance.modeType == ModeType.ENEMY)
+        if (GameMode.Instance.modeType == GameType.ENEMY)
         {
             ReArmDefender();
             spawnTimeDecreasePerEnemy = (maxenemySpawnTime - minEnemySpawntime) / maxEnemyEscaped;
             spawnSystem.enemySpawningTime = maxenemySpawnTime;
         }
-        else if (SceneHandler.Instance.modeType == ModeType.FRIENDLY)
+        else if (GameMode.Instance.modeType == GameType.FRIENDLY)
         {
             EnemiesEscapedText.gameObject.SetActive(false);
             launchBtn.gameObject.SetActive(false);
         }
+        //SetListnersToButtons();
+        //PauseUI.SetActive(false);
+        //GameOverUI.SetActive(false);
     }
 
-
+    //private void SetListnersToButtons()
+    //{
+    //    PlayAgainButton.onClick.AddListener(() => SceneHandler.Instance.PlayAgain());
+    //    ResumeButton.onClick.AddListener(() => Resume());
+    //    MainMenuPauseButton.onClick.AddListener(() => SceneHandler.Instance.MainMenu());
+    //    MainMenuGameOverButton.onClick.AddListener(() => SceneHandler.Instance.MainMenu());
+    //}
 
     public void ReArmDefender()
     {

@@ -53,6 +53,10 @@ public class AudioManager : MonoBehaviour
         SetSoundVolume(slider.value);
     }
 
+    public void StopSoundEffect()
+    {
+        soundEffecrSource.Stop();
+    }
 
 
     private void SetMusicVolume(float musicVolume)

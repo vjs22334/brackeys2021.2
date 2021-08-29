@@ -4,43 +4,17 @@ using UnityEngine.SceneManagement;
 public class SceneHandler : MonoBehaviour
 {
 
-    public ModeType modeType;
 
-
-    private static SceneHandler _instance = null;
-    public static SceneHandler Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<SceneHandler>();
-            }
-            return _instance;
-        }
-    }
-    void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else if (_instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-    }
     public void PlayTheFriendlyMode()
     {
         SceneManager.LoadScene("FriendlyMode");
-        modeType = ModeType.FRIENDLY;
+        GameMode.Instance.modeType = GameType.FRIENDLY;
     }
 
     public void PlayTheDefendingMode()
     {
         SceneManager.LoadScene("GameTest");//Change the scene name here
-        modeType = ModeType.ENEMY;
+        GameMode.Instance.modeType = GameType.ENEMY;
     }
 
 
@@ -57,6 +31,7 @@ public class SceneHandler : MonoBehaviour
 
     public void MainMenu()
     {
+        AudioManager.Instance.StopSoundEffect();
         SceneManager.LoadScene("MainMenu");
 
     }
@@ -65,8 +40,4 @@ public class SceneHandler : MonoBehaviour
 
 }
 
-public enum ModeType
-{
-    FRIENDLY,
-    ENEMY,
-}
+
