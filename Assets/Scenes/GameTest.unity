@@ -1902,8 +1902,8 @@ MonoBehaviour:
   ScoreText: {fileID: 626471627}
   LivesText: {fileID: 908747242}
   EnemiesEscapedText: {fileID: 1732195499}
-  GameOverScoreText: {fileID: 0}
-  GameOverScoreHighScoreText: {fileID: 0}
+  GameOverScoreText: {fileID: 2024514113}
+  GameOverScoreHighScoreText: {fileID: 455446258}
   launchBtn: {fileID: 456227100}
   PauseUI: {fileID: 816487157}
   GameOverUI: {fileID: 1563047849}
