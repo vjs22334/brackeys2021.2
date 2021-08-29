@@ -93,15 +93,25 @@ public class GameManager : MonoBehaviour
         score = 0;
         updateScoreUI();
         UpdatelivesUI();
-        EnemiesEscapedText.text = enemyEscapedCount.ToString();
+
         Time.timeScale = 1;
         isPlaying = true;
-        ReArmDefender();
-        spawnTimeDecreasePerEnemy = (maxenemySpawnTime - minEnemySpawntime) / maxEnemyEscaped;
-        spawnSystem.enemySpawningTime = maxenemySpawnTime;
+
+
         AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMESTART);
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
+        if (SceneHandler.Instance.modeType == ModeType.ENEMY)
+        {
+            ReArmDefender();
+            spawnTimeDecreasePerEnemy = (maxenemySpawnTime - minEnemySpawntime) / maxEnemyEscaped;
+            spawnSystem.enemySpawningTime = maxenemySpawnTime;
+        }
+        else if (SceneHandler.Instance.modeType == ModeType.FRIENDLY)
+        {
+            EnemiesEscapedText.gameObject.SetActive(false);
+            launchBtn.gameObject.SetActive(false);
+        }
     }
 
 
@@ -186,6 +196,12 @@ public class GameManager : MonoBehaviour
         }
         curretSpriteRen.enabled = false;
         DOTween.Kill(curretSpriteRen);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+            Pause();
     }
 
     public void Pause()
