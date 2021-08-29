@@ -1923,12 +1923,16 @@ MonoBehaviour:
   Totalives: 3
   ScorePerLanding: 1
   SCorePerKill: 1
+  LandColor: {r: 0, g: 0, b: 0, a: 0}
+  DefaultColor: {r: 0, g: 0, b: 0, a: 0}
   maxenemySpawnTime: 60
   minEnemySpawntime: 10
   maxEnemyEscaped: 5
   ScoreText: {fileID: 626471627}
   LivesText: {fileID: 908747242}
   EnemiesEscapedText: {fileID: 611173942}
+  GameOverScoreText: {fileID: 0}
+  GameOverScoreHighScoreText: {fileID: 0}
   launchBtn: {fileID: 474451408}
   PauseUI: {fileID: 816487157}
   GameOverUI: {fileID: 1563047849}
@@ -1937,6 +1941,7 @@ MonoBehaviour:
   currentRearmTime: 5
   defenderSpawned: 0
   defender: {fileID: 0}
+  landingZoneIndicator: []
 --- !u!1 &1186899771
 GameObject:
   m_ObjectHideFlags: 0
@@ -3749,7 +3754,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -12
   m_Sprite: {fileID: 21300000, guid: 9954985572bf3466fb6676045b3f5913, type: 3}
   m_Color: {r: 0.015197754, g: 0, b: 1, a: 1}
   m_FlipX: 0

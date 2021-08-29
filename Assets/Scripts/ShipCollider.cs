@@ -96,14 +96,14 @@ public class ShipCollider : MonoBehaviour
                 }
                 else if (otherShipType == ShipType.ENEMY)
                 {
-                    if (defender.ammoCount > 0)
-                    {
-                        defender.ammoCount--;
-                    }
-                    else
-                    {
-                        _ship.DestroyShip();
-                    }
+                    // if (defender.ammoCount > 0)
+                    // {
+                    //     defender.ammoCount--;
+                    // }
+                    // else
+                    // {
+                    //     _ship.DestroyShip();
+                    // }
                     GameManager.Instance.AddScore(false);
                 }
                 else if (otherShipType == ShipType.SHIP)

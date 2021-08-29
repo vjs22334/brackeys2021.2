@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
     public TMP_Text LivesText;
     public TMP_Text EnemiesEscapedText;
 
+    public TMP_Text GameOverScoreText;
+    public TMP_Text GameOverScoreHighScoreText;
+
     public Button launchBtn;
 
     public GameObject PauseUI;
@@ -43,6 +46,8 @@ public class GameManager : MonoBehaviour
 
     int lives;
     int score;
+
+    int highScore;
 
     public bool isPlaying;
 
@@ -95,6 +100,8 @@ public class GameManager : MonoBehaviour
         spawnTimeDecreasePerEnemy = (maxenemySpawnTime-minEnemySpawntime)/maxEnemyEscaped;
         spawnSystem.enemySpawningTime = maxenemySpawnTime;
         AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMESTART);
+
+        highScore = PlayerPrefs.GetInt("HighScore",0);
     }
 
 
@@ -251,5 +258,12 @@ public class GameManager : MonoBehaviour
         GameOverUI.SetActive(true);
         Time.timeScale = 0;
         AudioManager.Instance.PlayTheSoundEffect(TypesOfSoundEffect.GAMEOVER);
+        if(score > highScore){
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore",score);
+            PlayerPrefs.Save();
+        }
+        GameOverScoreText.text += score;
+        GameOverScoreHighScoreText.text += highScore;
     }
 }
