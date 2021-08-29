@@ -37,22 +37,35 @@ public class AudioManager : MonoBehaviour
         }
 
         ChangeMusic(CurrentScene.MAINMENU);
-        SetVolume(PlayerPrefs.GetFloat("Volume", 0.5f));
+        SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
+        SetSoundVolume(PlayerPrefs.GetFloat("SoundVolume", 0.5f));
 
     }
 
-    public void ChangeVolume()
+    public void ChangeTheMusicVolume(Slider slider)
     {
-        float volume = transform.Find("VolumeSlider").GetComponent<Slider>().value;
-        PlayerPrefs.SetFloat("Volume", volume);
-        SetVolume(volume);
+        PlayerPrefs.SetFloat("MusicVolume", slider.value);
+        SetMusicVolume(slider.value);
+    }
+    public void ChangeTheSoundVolume(Slider slider)
+    {
+        PlayerPrefs.SetFloat("SoundVolume", slider.value);
+        SetSoundVolume(slider.value);
     }
 
-    private void SetVolume(float vol)
+
+
+    private void SetMusicVolume(float musicVolume)
     {
-        bgMusicSource.volume = vol;
-        soundEffecrSource.volume = vol;
+        bgMusicSource.volume = musicVolume;
+
     }
+
+    private void SetSoundVolume(float soundEffectVolume)
+    {
+        soundEffecrSource.volume = soundEffectVolume;
+    }
+
 
     public void ChangeMusic(CurrentScene current)
     {
